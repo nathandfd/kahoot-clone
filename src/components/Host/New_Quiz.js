@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {Redirect}from "react-router-dom"
 import {connect} from 'react-redux'
-import {editingQuiz} from '../../Ducks/Reducer';
+import {editingQuiz, getApiRequestUrl} from '../../Ducks/Reducer';
 
 class New_Quiz extends Component {
     constructor(){
@@ -27,7 +27,7 @@ class New_Quiz extends Component {
         })
     }
     createQuiz(){
-        axios.post('/api/newquiz', {name: this.state.quiz_name, info: this.state.info}).then( res => {
+        axios.post(`${getApiRequestUrl()}/api/newquiz`, {name: this.state.quiz_name, info: this.state.info}).then( res => {
            this.props.editingQuiz(res.data[0])
            this.setState({
                redirect: true
@@ -42,12 +42,12 @@ class New_Quiz extends Component {
         return (
             <div className='mapped-container' >
                 <div className='new-kwizz-form' >
-                    <label className='kwizz-desc kwizz-info' >New Kwizz Title</label>
+                    <label className='kwizz-desc kwizz-info' >Titre du nouveau Kwizz</label>
                     <input className='title-input' onChange={this.handleInput} type='text'/>
                     <label className='kwizz-desc kwizz-info'>Description</label>
                     <textarea className='desc-input' onChange={this.handleTextarea}></textarea>
                     <div className='kwizz-info ok-go-div' >
-                        <button onClick={this.createQuiz} className='btn-play  ok-go' >Ok, Go</button>
+                        <button onClick={this.createQuiz} className='btn-play  ok-go' >Valider</button>
                     </div> 
                 </div> 
             </div> 

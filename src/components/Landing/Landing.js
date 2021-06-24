@@ -46,18 +46,17 @@ class Landing extends Component {
         return (
             <div className='component-container' >
             <div>
-                <Stars/>
-                </div> 
+                </div>
                 {
                     !this.state.toggle
                         ?
                         <div className='landing-wrapper' >
                             <div className='logo-container' >
-                            <img src={Kwizz} alt='Kwizz logo' className='logo'/>
+                                <h1>MyKwizz !</h1>
                             </div> 
                             <div className='player-input-wrapper' >
-                                <input type='number' value={this.state.pin} placeholder='Kwizz! PIN' onChange={this.handleInput} className='input-user'/>
-                                <button onClick={this.handleToggle} className='btn-enter' >Enter</button>
+                                <input type='number' value={this.state.pin} placeholder='Code PIN Kwizz' onChange={this.handleInput} className='input-user'/>
+                                <button onClick={this.handleToggle} className='btn-enter' >Entrer</button>
                             </div> 
                         </div>
                         :
@@ -66,18 +65,19 @@ class Landing extends Component {
                             <img src={Kwizz} alt='Kwizz logo' className='logo'/>
                           </div> 
                             <div>
-                                <input type='text' value={this.state.nickname} placeholder='Nickname' onChange={this.handleNicknameInput} className='input-user' />
+                                <input type='text' value={this.state.nickname} placeholder='Pseudo' onChange={this.handleNicknameInput} className='input-user' />
                                 <Link to='/player'>
-                                    <button onClick={this.handleGo} className='btn-enter' >OK, go!</button>
+                                    <button onClick={this.handleGo} className='btn-enter' >OK, c'est parti !</button>
                                 </Link>
                             </div> 
                         </div>
                 }
                 <div className='logo-host' >
-                    <img src={Kwizzard} alt='' className='kwizzard'/>
-                    <div className='btn-host' >
-                        <a id='atag' href='http://localhost:3030/auth'>HOST</a>
-                    </div>
+                    <Link to={"/host"}>
+                        <div className='btn-host' >
+                            <a id='atag'>Organisateur</a>
+                        </div>
+                    </Link>
                 </div>
             </div>
         )

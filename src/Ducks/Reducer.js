@@ -2,7 +2,8 @@ const initialState = {
     quiz: {},
     nickname: '',
     selectedPin: 0,
-    quizToEdit: {}
+    quizToEdit: {},
+    requestUrl:'http://localhost:3030'
 }
 
 const SELECTED_QUIZ = 'SELECTED_QUIZ'
@@ -49,4 +50,8 @@ export function editingQuiz(quiz) {
         type: QUIZ_TO_EDIT,
         payload: quiz
     }
+}
+
+export function getApiRequestUrl(){
+    return initialState.requestUrl
 }

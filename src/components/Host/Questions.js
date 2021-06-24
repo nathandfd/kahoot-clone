@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { editingQuiz } from '../../Ducks/Reducer';
+import {editingQuiz, getApiRequestUrl} from '../../Ducks/Reducer';
 import './Host-Question.css';
 import './Host.css';
 
@@ -25,7 +25,7 @@ class Questions extends Component {
     }
 
     getQuestions() {
-        axios.get(`/api/getquestions/${this.props.quizToEdit.id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quizToEdit.id}`).then(res => {
             this.setState({
                 questions: res.data,
             })
@@ -33,7 +33,7 @@ class Questions extends Component {
     }
 
     deleteQuestion(id) {
-        axios.delete(`/api/deletequestion/${id}`).then(res => {
+        axios.delete(`${getApiRequestUrl()}/api/deletequestion/${id}`).then(res => {
             this.getQuestions()
         })
     }
@@ -50,7 +50,7 @@ class Questions extends Component {
             toggle: !this.state.toggle
         })
         if (newName && newInfo) {
-            axios.put('/api/updatequiz', { newName, newInfo, id: quiz.id }).then(res => {
+            axios.put(`${getApiRequestUrl()}/api/updatequiz`, { newName, newInfo, id: quiz.id }).then(res => {
                 this.handleUpdatedQuiz(quiz.id)
             })
         } else {
@@ -58,7 +58,7 @@ class Questions extends Component {
         }
     }
     handleUpdatedQuiz(id) {
-        axios.get(`/api/getquiz/${id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquiz/${id}`).then(res => {
             this.props.editingQuiz(res.data[0])
             this.setState({
                 quiz: this.props.quizToEdit
@@ -69,6 +69,7 @@ class Questions extends Component {
     render() {
         let { questions } = this.state;
         if (questions) {
+            console.log(questions)
             var mappedQuestions = questions.map((question) => {
                 return (
                     <div key={question.id} className='question-container'>
@@ -78,14 +79,14 @@ class Questions extends Component {
                             <li>2: {question.answer2}</li>
                             <li>3: {question.answer3}</li>
                             <li>4: {question.answer4}</li>
-                            <li>Correct: {question.correctanswer}</li>
+                            <li>Correct: {question.correctAnswer}</li>
 
                         </ul>
                         <div className='btn-container-edit' >
                             <Link to={`/host/editquestion/${question.id}`}>
-                                <button className='btn-play' >Edit</button>
+                                <button className='btn-play' >Modifier</button>
                             </Link>
-                            <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Delete</button>
+                            <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Supprimer</button>
                         </div> 
                     </div>
                 )
@@ -101,7 +102,7 @@ class Questions extends Component {
                     <div className='toggle-container'>
                         <div className='btn-done-div'>
                             <Link to='/host'>
-                                <button className='btn-play btn-done' >Done</button>
+                                <button className='btn-play btn-done' >Terminé</button>
                             </Link>
                         </div>
                     <div className='kwizz-container-edit'>
@@ -109,7 +110,7 @@ class Questions extends Component {
                         <br />
                         <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p>
                         <div className='btn-update'>
-                        <button onClick={() => this.displayEdit()} className='btn-play' >Update</button>
+                        <button onClick={() => this.displayEdit()} className='btn-play' >Modifier</button>
                         </div>
                     </div>
                     </div>
@@ -117,7 +118,7 @@ class Questions extends Component {
                         <div className='toggle-container'>
                             <div className='btn-done-div'>
                                 <Link to='/host'>
-                                    <button className='btn-play btn-done' >Done</button>
+                                    <button className='btn-play btn-done' >Terminé</button>
                                 </Link>
                             </div>
                     <div className='kwizz-container-edit'>
@@ -127,8 +128,8 @@ class Questions extends Component {
                         <br/>
                         <textarea placeholder={this.state.quiz.info} onChange={(e) => this.setState({ newInfo: e.target.value })} className='desc-input input-edit'></textarea>
                     <div className='btn-container-edit'>
-                        <button onClick={() => this.updateQuiz()} className='btn-play'>Save</button>
-                        <button onClick={() => this.displayEdit()} className='btn-play' >Cancel</button>
+                        <button onClick={() => this.updateQuiz()} className='btn-play'>Sauvegarder</button>
+                        <button onClick={() => this.displayEdit()} className='btn-play' >Annuler</button>
                     </div>
                     </div>
                     </div>
@@ -136,7 +137,7 @@ class Questions extends Component {
                 <div className='question-edit-wrapper' >
                     <div className='add-quesiton-div' >
                         <Link to={`/host/newquestion/${this.props.quizToEdit.id}`} className='btn-link'>
-                            <button className='btn-new' id='add-question-btn'>Add Question</button>
+                            <button className='btn-new' id='add-question-btn'>Ajouter une question</button>
                         </Link>
                     </div> 
                     <br /><br />
@@ -150,7 +151,7 @@ class Questions extends Component {
 }
 function mapStateToProps(state) {
     return {
-        quizToEdit: state.quizToEdit
+        quizToEdit: state.quizToEdit,
     }
 }
 

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {selectedQuiz, editingQuiz} from '../../Ducks/Reducer';
+import {selectedQuiz, editingQuiz, getApiRequestUrl} from '../../Ducks/Reducer';
 import './Host.css';
 import Kwizz from '../../Assests/Kwizz.svg';
  
@@ -21,7 +21,7 @@ class Main extends Component {
         
     }
     getQuizzes(){
-        axios.get(`/api/getQuizzes`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getQuizzes`,{withCredentials: true}).then(res => {
             this.setState({
                 quizzes: res.data
             })
@@ -35,7 +35,7 @@ class Main extends Component {
         })
     }
     deleteQuiz(id){
-        axios.delete(`/api/deletequiz/${id}`).then(res => {
+        axios.delete(`${getApiRequestUrl()}/api/deletequiz/${id}`).then(res => {
             if (res.status === 200){
                 this.getQuizzes();
             } else{
@@ -55,10 +55,10 @@ class Main extends Component {
                         <h1 className='kwizz-info kwizz-title' >{quiz.quiz_name}</h1>
                         <p className='kwizz-info kwizz-desc'>{quiz.info}</p>
                     <div className='btn-container' >
-                        <button onClick={() => this.setRedirect(quiz)} className='btn-play' >Play</button>
-                        <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-play' >Delete</button>
+                        <button onClick={() => this.setRedirect(quiz)} className='btn-play' >Jouer</button>
+                        <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-play' >Supprimer</button>
                     <Link to='/host/questions'>
-                        <button onClick={()=> this.props.editingQuiz(quiz)} className='btn-play' >Edit</button>
+                        <button onClick={()=> this.props.editingQuiz(quiz)} className='btn-play' >Modifier</button>
                     </Link>
                     </div> 
                 </div> 
@@ -67,11 +67,11 @@ class Main extends Component {
         return (
             <div className='mapped-container' >
                 <div className='host-logo-container'>
-                    <img src={Kwizz} alt='kwizz logo' className='logo'/>
+                    <h1>MyKwizz</h1>
                 </div> 
                 <div className='newKwizz' >
                     <Link to='/host/newquiz' className='btn-link'>
-                    <button className='btn-new'>New Kwizz!</button>
+                    <button className='btn-new'>Nouveau Kwizz!</button>
                     </Link>
                 </div> 
                 <div className='mapped-Kwizzes-container' >

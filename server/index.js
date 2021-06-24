@@ -1,13 +1,23 @@
 require('dotenv').config();
 const express = require('express')
+    ,cors = require('cors')
     ,session = require('express-session')
-    ,passport = require('passport')
-    ,Auth0Stratagy = require('passport-auth0')
-    ,massive = require('massive')
+    ,mysql = require('mysql')
     ,bodyParser = require('body-parser')
     ,socket = require('socket.io')
     ,quizCtrl = require('./quizCtrl')
     ,{Quiz} = require('./utils/quiz')
+
+const env = {
+    SERVER_PORT: "3030",
+    SESSION_SECRET:"suce",
+    DOMAIN:"localhost:3000",
+    CLIENT_ID:"suce",
+    CLIENT_SECRET:"suce",
+    CALLBACK_URL:"http://localhost:3000",
+    CONNECTION_STRING:"mongodb+srv://nathan:!!Nathan89@cluster0.tzray.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    FRONTEND_URL:"localhost:3030"
+}
 
 const {
     SERVER_PORT,
@@ -18,7 +28,7 @@ const {
     CALLBACK_URL,
     CONNECTION_STRING,
     FRONTEND_URL
-} =  process.env;
+} =  env//process.env;
 
 const app = express();
 const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',SERVER_PORT)}))
@@ -58,62 +68,40 @@ io.on('connection', socket => {
 
 app.use(express.static(`${__dirname}/../build`))
 app.use(bodyParser.json())
+app.use(cors({
+    origin:'http://localhost:3000',
+    credentials:true
+}))
 
-massive(CONNECTION_STRING).then(db =>{app.set('db',db)} )
+app.set('db',mysql.createConnection({
+    host:'localhost',
+    port:'8889',
+    user:'root',
+    password:'root',
+    database:'mykwiz'
+}))
 
 app.use(session({
     secret:SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie:{
+        secure:false
+    }
 }))
 
-///////auth0
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new Auth0Stratagy({
-    domain:DOMAIN,
-    clientID:CLIENT_ID,
-    clientSecret:CLIENT_SECRET,
-    callbackURL:CALLBACK_URL,
-    scope:'openid profile'
-}, (accessToken, refreshToken, extraParams, profile, done)=> {
-    //DB calls here 
-    const db = app.get('db');
-    let {id, displayName, picture} = profile
-    db.get_user([id])
-        .then(user=>{
-            if(user[0]){
-                done(null,user[0].id)
-            }else{db.add_user([displayName, id])
-                .then((createdUser)=>{
-                    done(null, createdUser[0].id)
-                })
-            }
-        })
-}))
-
-passport.serializeUser( (primaryKeyID,done)=>{
-    done(null, primaryKeyID)
-})
-passport.deserializeUser( (primaryKeyID,done)=>{
-    app.get('db')
-        .find_session_user([primaryKeyID])
-        .then(user=>{
-            done(null, user[0])
-        }) 
-})
-
-function check(req,res,next) {
-    if(req.user){res.redirect(`${process.env.FRONTEND_URL}#/host`)
-    } else {next()}
+function check(req,res) {
+    const user = {
+        id:1
+    }
+    req.session.user = user
+    console.log(req.session)
+    res.send(true)
 }
-app.get('/auth', check, passport.authenticate('auth0'));
-app.get('/auth/callback', passport.authenticate('auth0',{
-    successRedirect:`${process.env.FRONTEND_URL}#/host`
-}))
-app.get('/auth/logout', (req,res)=>{req.logOut();res.redirect(`${process.env.FRONTEND_URL}`)})
 
-app.get('/auth/user', (req,res)=>{ 
+app.get('/auth', check);
+
+app.get('/auth/user', (req,res)=>{
     req.user
         ? res.status(200).send(req.user)
         : res.status(401).send('Not signed in')

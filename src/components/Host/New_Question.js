@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import './Host-New-Question.css';
 import './Host.css';
+import {getApiRequestUrl} from "../../Ducks/Reducer";
 
 export default class New_Question extends Component {
     constructor() {
@@ -23,7 +24,7 @@ export default class New_Question extends Component {
         let { question, answer1, answer2, answer3, answer4, correctAnswer } = this.state;
         let { id } = this.props.match.params
         if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer) {
-            axios.post('/api/newquestion', { question, answer1, answer2, answer3, answer4, correctAnswer, id }).then(res => {
+            axios.post(`${getApiRequestUrl()}/api/newquestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }).then(res => {
 
                 if (res.status === 200) {
                     this.setState({

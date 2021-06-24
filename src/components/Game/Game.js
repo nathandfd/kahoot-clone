@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
+import {getApiRequestUrl} from "../../Ducks/Reducer";
 
 class Game extends Component {
     constructor() {
@@ -24,11 +25,11 @@ class Game extends Component {
         this.nextQuestion = this.nextQuestion.bind(this);
     }
     componentDidMount() {
-        axios.get(`/api/getquestions/${this.props.quiz.id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quiz.id}`).then(res => {
             this.setState({ questions: res.data })
             console.log(this.questions)
         })
-        this.socket = io('/');
+        this.socket = io(`${getApiRequestUrl()}/`);
         this.generatePin();
         this.socket.on('room-joined', data => {
             this.addPlayer(data.name, data.id)
@@ -52,7 +53,7 @@ class Game extends Component {
                 isLive: true
             })
         } else {
-            alert('You need at least 3 players to start')
+            alert('Vous avez besoin d\'au moins 3 joueurs pour commencer')
         }
     }
     questionOver() {
@@ -111,7 +112,7 @@ class Game extends Component {
         let { pin, questions, currentQuestion } = this.state;
         this.timeKeeper();
         // this.hotTimer();
-
+        console.log(questions)
         currentQuestion === questions.length 
             ? this.setState({ gameOver: true })
             : 
@@ -141,7 +142,7 @@ class Game extends Component {
         let updatedPlayers = this.state.players.filter(player => player.name !== name);
         
         player[0].qAnswered = true;
-        answer === this.state.questions[this.state.currentQuestion].correctanswer
+        answer === this.state.questions[this.state.currentQuestion].correctAnswer
             ?player[0].answeredCorrect = true
             :player[0].answeredCorrect = false
 
@@ -172,14 +173,14 @@ class Game extends Component {
         return (
             <div className='component-container' >
                 <div className='pin'>
-                <p id='player-pin'>Kwizz Pin</p>
+                <p id='player-pin'>Code PIN du Kwizz</p>
                 <h1>{pin}</h1>
                 </div> 
                 {
                     !isLive && !questionOver && !gameOver ?
                         <div className='btn-players' >
-                            <button onClick={() => this.startGame()}className='btn-play' >Play</button>
-                            <p className='player-name' id='player-join'>Players joined!</p>
+                            <button onClick={() => this.startGame()}className='btn-play' >C'est parti !</button>
+                            <p className='player-name' id='player-join'>Joueurs connectés</p>
                             {mappedPlayers}
                         </div>
                         :

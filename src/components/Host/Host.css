@@ -130,6 +130,9 @@
 .host-logo-container{
     width: 100vw;
     text-align: center;
+    font-size: 3em;
+    color: white;
+    margin-top:2rem;
 }
 
 .logo{

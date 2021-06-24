@@ -5,6 +5,7 @@ import PlayerQuestions from './Player_Questions';
 import PlayerQuestionOver from './Player_Question_Over';
 import './Game.css';
 import load from '../../Assests/load-circle-outline.svg'
+import {getApiRequestUrl} from "../../Ducks/Reducer";
 
 class Player extends Component {
     constructor() {
@@ -20,7 +21,7 @@ class Player extends Component {
         this.submitAnswer = this.submitAnswer.bind(this);
     }
     componentDidMount() {
-        this.socket = io('/');
+        this.socket = io(`${getApiRequestUrl()}/`);
         this.socket.emit('player-joined', this.props.selectedPin)
         this.socket.emit('player-add', this.props)
         this.socket.on('room-joined', (data) => { console.log('Quiz data: ' + data) })
@@ -63,9 +64,9 @@ class Player extends Component {
                     !gameStarted && !questionOver
                     ?
                     <div>
-                            <p>You're in!
+                            <p>Vous y êtes !
                              <br />
-                                Do you see your nickname on the screen?
+                                Pouvez-vous voir votre pseudo sur l'écran ?
                             </p>
                              <div className='answer-container'>
                                     <div className=' q-blank q'></div> 
