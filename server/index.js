@@ -69,7 +69,7 @@ io.on('connection', socket => {
 app.use(express.static(`${__dirname}/../build`))
 app.use(bodyParser.json())
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:'http://192.168.1.29:3000',
     credentials:true
 }))
 
@@ -90,16 +90,17 @@ app.use(session({
     }
 }))
 
-function check(req,res) {
+app.post('/auth', (req,res)=>{
     const user = {
         id:1
     }
-    req.session.user = user
-    console.log(req.session)
-    res.send(true)
-}
-
-app.get('/auth', check);
+    if (req.body.login === "suce" && req.body.password === "pute"){
+        req.session.user = user
+        res.send(true)
+    }else {
+        res.send(false)
+    }
+});
 
 app.get('/auth/user', (req,res)=>{
     req.user

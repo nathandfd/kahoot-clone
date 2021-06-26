@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {selectedQuiz, editingQuiz, getApiRequestUrl} from '../../Ducks/Reducer';
+import {selectedQuiz, editingQuiz, getApiRequestUrl, setConnected} from '../../Ducks/Reducer';
 import './Host.css';
 import Kwizz from '../../Assests/Kwizz.svg';
  
@@ -12,7 +12,7 @@ class Main extends Component {
         super();
         this.state= {
             quizzes: [],
-            redirect: false
+            redirect: false,
         }
         this.setRedirect = this.setRedirect.bind(this);
     }
@@ -25,6 +25,8 @@ class Main extends Component {
             this.setState({
                 quizzes: res.data
             })
+        }).catch(e=>{
+            alert("Aïe c'est pété, veuillez contacter un développeur")
         })
     }
     setRedirect(e){
@@ -39,12 +41,15 @@ class Main extends Component {
             if (res.status === 200){
                 this.getQuizzes();
             } else{
-                alert('Something went wrong :(')
+                alert("Aïe c'est pété, veuillez contacter un développeur")
             }
         })
     }
 
     render() {
+        if (!this.props.isConnected){
+            return <Redirect to="/login"/>
+        }
         if (this.state.redirect){
            return <Redirect to='/game'/>
         }
@@ -82,4 +87,8 @@ class Main extends Component {
     }
 }
 
-export default connect(null, {selectedQuiz, editingQuiz})(Main);
+const mapStateToProps = (state)=>(
+        {isConnected:state.connected}
+    )
+
+export default connect(mapStateToProps, {selectedQuiz, editingQuiz})(Main);

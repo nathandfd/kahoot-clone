@@ -3,13 +3,15 @@ const initialState = {
     nickname: '',
     selectedPin: 0,
     quizToEdit: {},
-    requestUrl:'http://localhost:3030'
+    connected:false,
+    requestUrl:'http://192.168.1.29:3030'
 }
 
 const SELECTED_QUIZ = 'SELECTED_QUIZ'
 const NEW_NICKNAME = 'NICKNAME'
 const SELECTED_PIN = 'SELECTED_PIN'
 const QUIZ_TO_EDIT = 'QUIZ_TO_EDIT'
+const CONNECTED = 'CONNECTED'
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -21,7 +23,10 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { selectedPin: action.payload })
         case QUIZ_TO_EDIT:
             return Object.assign({}, state, { quizToEdit: action.payload })
+        case CONNECTED:
+            return Object.assign({}, state, {connected: action.payload})
         default:
+            return state
             break;
     }
 }
@@ -49,6 +54,13 @@ export function editingQuiz(quiz) {
     return {
         type: QUIZ_TO_EDIT,
         payload: quiz
+    }
+}
+
+export function setConnected(isConnected){
+    return{
+        type:CONNECTED,
+        payload:isConnected
     }
 }
 

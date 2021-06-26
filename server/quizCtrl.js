@@ -4,7 +4,7 @@ module.exports = {
         let { id } = req.session.user;
         const db = req.app.get('db');
 
-        db.query('SELECT * FROM quizes WHERE user_id = 1;',(err,results)=>{
+        db.query(`SELECT * FROM quizes WHERE user_id = ${id};`,(err,results)=>{
             if (!err){
                 res.status(200).send(results)
             }

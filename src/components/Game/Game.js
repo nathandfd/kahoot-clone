@@ -37,6 +37,7 @@ class Game extends Component {
         this.socket.on('player-answer', data => {
             this.submitAnswer(data.name, data.answer)
         })
+        alert(getApiRequestUrl())
 
     }
     generatePin() {
