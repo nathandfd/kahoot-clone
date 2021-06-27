@@ -33,6 +33,15 @@ const {
 const app = express();
 const io = socket(app.listen(SERVER_PORT, ()=>{console.log('Connected on port',SERVER_PORT)}))
 
+const isLogged = (req,res,next)=>{
+    if (req.session.user.id){
+        next()
+    }
+    else{
+        res.status(401).send("Vous n'êtes pas autorisé à venir ici")
+    }
+}
+
 //When a connection to server is made from client
 io.on('connection', socket => {
     
@@ -69,7 +78,7 @@ io.on('connection', socket => {
 app.use(express.static(`${__dirname}/../build`))
 app.use(bodyParser.json())
 app.use(cors({
-    origin:'http://192.168.1.29:3000',
+    origin:['http://192.168.1.29:3000','http://localhost:3000'],
     credentials:true
 }))
 
@@ -112,6 +121,8 @@ app.get('/auth/user', (req,res)=>{
 /////////////////// DB calls for quizzes
 
 //Get
+
+app.use(isLogged)
 
 app.get('/api/getQuizzes', quizCtrl.getQuizzes )
 app.get('/api/getquestions/:id', quizCtrl.getQuestions)

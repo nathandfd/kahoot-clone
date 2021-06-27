@@ -24,7 +24,7 @@ export default class Edit_Question extends Component {
         this.getQuestion()
     }
     getQuestion() {
-        axios.get(`${getApiRequestUrl()}/api/getquestion/${this.props.match.params.id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquestion/${this.props.match.params.id}`, {withCredentials:true}).then(res => {
             let question = res.data[0]
             this.setState({
                 id: question.id,
@@ -41,7 +41,7 @@ export default class Edit_Question extends Component {
     updateQuestion() {
         let { question, answer1, answer2, answer3, answer4, correctAnswer, id } = this.state;
         if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer && id) {
-            axios.put(`${getApiRequestUrl()}/api/updatequestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }).then(res => {
+            axios.put(`${getApiRequestUrl()}/api/updatequestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }, {withCredentials:true}).then(res => {
                 if (res.status === 200) {
                     this.setState({
                         redirect: true

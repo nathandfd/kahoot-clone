@@ -97,7 +97,7 @@ module.exports = {
         let { id, question, answer1, answer2, answer3, answer4, correctAnswer } = req.body;
         const db = req.app.get('db');
         db.query(`update questions
-            set question = ${question}, answer1 = ${answer1}, answer2 = ${answer2}, answer3 = ${answer3}, answer4 = ${answer4}, correctAnswer = ${correctAnswer}
+            set question = '${question}', answer1 = '${answer1}', answer2 = '${answer2}', answer3 = '${answer3}', answer4 = '${answer4}', correctAnswer = ${correctAnswer}
             where id = ${id}`,(err,results)=>{
             if (!err){
                 res.status(200).send(results)
@@ -111,7 +111,7 @@ module.exports = {
         let { id, newName, newInfo } = req.body;
         const db = req.app.get('db');
         db.query(`update quizes
-                  set quiz_name = ${newName}, info = ${newInfo}
+                  set quiz_name = '${newName}', info = '${newInfo}'
                   where id = ${id}
         `,(err,results)=>{
             if (!err){

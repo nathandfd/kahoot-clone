@@ -25,8 +25,6 @@ class Main extends Component {
             this.setState({
                 quizzes: res.data
             })
-        }).catch(e=>{
-            alert("Aïe c'est pété, veuillez contacter un développeur")
         })
     }
     setRedirect(e){

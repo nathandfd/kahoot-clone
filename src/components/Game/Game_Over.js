@@ -16,7 +16,7 @@ export default function GameOver(props){
             <br/>
             <Link to='/host'>
             <button className='btn-newGame'>
-            Start a new Game?
+            Démarrer une nouvelle partie ?
             </button>
             </Link>
         </div> 

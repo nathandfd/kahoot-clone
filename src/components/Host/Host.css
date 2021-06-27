@@ -17,13 +17,10 @@
     border-radius: 2px;
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    background-color: #333;
-    background-image: linear-gradient(to bottom,#333,#333);
-    background-repeat: repeat-x;
     border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
-    background-position: 0;
-    width: 100px;
-    height:45px;
+    background: #333 linear-gradient(to bottom, #333, #333) repeat-x 0;
+    width: auto;
+    height:2.5rem;
     font-weight: 600;
     font-size: 20px;
     transition: 250ms
@@ -147,7 +144,6 @@
     height: 400px;
     width: 800px;
     margin-top: 100px;
-    padding: 60px;
     box-sizing: border-box;
     box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.137);
     background-image: linear-gradient(to bottom,#506fc2,#4d65aaa6);

@@ -25,7 +25,7 @@ class Questions extends Component {
     }
 
     getQuestions() {
-        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quizToEdit.id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quizToEdit.id}`, {withCredentials:true}).then(res => {
             this.setState({
                 questions: res.data,
             })
@@ -33,7 +33,7 @@ class Questions extends Component {
     }
 
     deleteQuestion(id) {
-        axios.delete(`${getApiRequestUrl()}/api/deletequestion/${id}`).then(res => {
+        axios.delete(`${getApiRequestUrl()}/api/deletequestion/${id}`, {withCredentials:true}).then(res => {
             this.getQuestions()
         })
     }
@@ -50,7 +50,7 @@ class Questions extends Component {
             toggle: !this.state.toggle
         })
         if (newName && newInfo) {
-            axios.put(`${getApiRequestUrl()}/api/updatequiz`, { newName, newInfo, id: quiz.id }).then(res => {
+            axios.put(`${getApiRequestUrl()}/api/updatequiz`, { newName, newInfo, id: quiz.id }, {withCredentials:true}).then(res => {
                 this.handleUpdatedQuiz(quiz.id)
             })
         } else {
@@ -58,7 +58,7 @@ class Questions extends Component {
         }
     }
     handleUpdatedQuiz(id) {
-        axios.get(`${getApiRequestUrl()}/api/getquiz/${id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquiz/${id}`, {withCredentials:true}).then(res => {
             this.props.editingQuiz(res.data[0])
             this.setState({
                 quiz: this.props.quizToEdit

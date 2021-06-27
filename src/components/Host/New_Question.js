@@ -24,7 +24,7 @@ export default class New_Question extends Component {
         let { question, answer1, answer2, answer3, answer4, correctAnswer } = this.state;
         let { id } = this.props.match.params
         if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer) {
-            axios.post(`${getApiRequestUrl()}/api/newquestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }).then(res => {
+            axios.post(`${getApiRequestUrl()}/api/newquestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }, {withCredentials:true}).then(res => {
 
                 if (res.status === 200) {
                     this.setState({

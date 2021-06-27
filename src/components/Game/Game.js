@@ -37,8 +37,6 @@ class Game extends Component {
         this.socket.on('player-answer', data => {
             this.submitAnswer(data.name, data.answer)
         })
-        alert(getApiRequestUrl())
-
     }
     generatePin() {
         let newPin = Math.floor(Math.random() * 9000, 10000)
