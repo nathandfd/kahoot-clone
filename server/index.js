@@ -103,7 +103,7 @@ app.post('/auth', (req,res)=>{
     const user = {
         id:1
     }
-    if (req.body.login === "suce" && req.body.password === "pute"){
+    if (req.body.login === "admin" && req.body.password === "admin"){
         req.session.user = user
         res.send(true)
     }else {

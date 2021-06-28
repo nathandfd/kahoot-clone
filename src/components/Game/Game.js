@@ -25,7 +25,7 @@ class Game extends Component {
         this.nextQuestion = this.nextQuestion.bind(this);
     }
     componentDidMount() {
-        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quiz.id}`).then(res => {
+        axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quiz.id}`, {withCredentials:true}).then(res => {
             this.setState({ questions: res.data })
             console.log(this.questions)
         })

@@ -1,0 +1,64 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+}
+
+.title{
+    font-size: 3em;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container{
+    position: relative;
+}
+
+.label{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    pointer-events: none;
+    transition-duration: .2s;
+}
+
+input:focus + .label, input:not(:placeholder-shown) + label{
+    position: absolute;
+    top: -15px;
+    left: 0;
+    font-size: 0.8em;
+}
+
+.input{
+    margin-bottom: 2rem;
+    width: 12rem;
+    height: 1.5rem;
+    border: none;
+    border-bottom: 2px solid #333333;
+    font-size: 1em;
+}
+
+.login-button{
+    width: 12rem;
+    height: 2rem;
+    border: 2px solid #333333;
+    background-color: transparent;
+    font-size: 1.2rem;
+    transition-duration: .2s;
+}
+
+.login-button:hover{
+    background-color: #333333;
+    color: white;
+    cursor: pointer;
+}

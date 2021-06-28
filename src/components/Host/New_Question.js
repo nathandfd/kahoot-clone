@@ -38,7 +38,7 @@ export default class New_Question extends Component {
             })
 
         } else {
-            alert('All fields must be completed')
+            alert('Tous les champs doivent être remplis')
         }
     }
     render() {
@@ -49,7 +49,7 @@ export default class New_Question extends Component {
 // I decided to just use arrow functions here instead of binding all of this at the top - Nate
   <div className='background'>
             <Link to='/host/questions' className='btn-go-back'>
-                go back pls :)
+                &larr; Retour
             </Link>
             <br/>
     <div className='new-question-wrapper'>
@@ -59,27 +59,27 @@ export default class New_Question extends Component {
                 </div>
             
                   <div className='new-q'> 
-                    <label>Answer1</label>
+                    <label>Réponse 1 : </label>
                         <input onChange={(e) => this.setState({ answer1: e.target.value })} height='100'/>
                 </div>
                 <div className='new-q'>
-                    <label>Answer2</label>
+                    <label>Réponse 2 : </label>
                         <input onChange={(e) => this.setState({ answer2: e.target.value })} />
                 </div>
                 <div className='new-q'>
-                    <label>Answer3</label>
+                    <label>Réponse 3 : </label>
                         <input onChange={(e) => this.setState({ answer3: e.target.value })} />
                </div>
                 <div className='new-q'>
-                    <label>Answer4</label>
+                    <label>Réponse 4 : </label>
                         <input onChange={(e) => this.setState({ answer4: e.target.value })} />
                 </div>
                 <div className='new-q'>
-                    <label>Correct answer</label>
+                    <label>Bonne réponse : </label>
                     <input type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
                 </div>
                     <div className='next'>
-                        <button onClick={this.addQuestion}  className='btn-new'>Next</button>
+                        <button onClick={this.addQuestion}  className='btn-new'>Valider</button>
                     </div>
         </div>
      </div>   

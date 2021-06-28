@@ -63,7 +63,7 @@ export default class Edit_Question extends Component {
 // Used a bunch of arrow functions here instead of binding at top - Nate
         <div className='mapped-container'>
         <Link to='/host/questions' className='btn-link'>
-        go back
+        &larr; Retour
         </Link>
             <div className='new-q'>
                 <label>Question</label>

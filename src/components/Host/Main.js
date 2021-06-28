@@ -35,7 +35,7 @@ class Main extends Component {
         })
     }
     deleteQuiz(id){
-        axios.delete(`${getApiRequestUrl()}/api/deletequiz/${id}`).then(res => {
+        axios.delete(`${getApiRequestUrl()}/api/deletequiz/${id}`,{withCredentials: true}).then(res => {
             if (res.status === 200){
                 this.getQuizzes();
             } else{

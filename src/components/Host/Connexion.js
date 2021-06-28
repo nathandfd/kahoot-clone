@@ -18,12 +18,20 @@ function Connexion({setConnected,isConnected}){
     }
 
     return(
-    <div>
+    <div className={"body"}>
         {isConnected && <Redirect to={"/host"}/>}
-            <h1>Connexion</h1>
-            <input type={"text"} value={login} onChange={(e)=>{setLogin(e.target.value)}}/>
-            <input type={"password"} value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-            <button onClick={submitLogin}>Connexion</button>
+            <h1 className={"title"}>Connexion</h1>
+            <div className={"form"}>
+                <div className={"input-container"}>
+                    <input id={"login"} placeholder={" "} className={"input"} type={"text"} value={login} onChange={(e)=>{setLogin(e.target.value)}}/>
+                    <label className={"label"} htmlFor="login">Identifiant</label>
+                </div>
+                <div className={"input-container"}>
+                    <input id={"password"} placeholder={" "} className={"input"} type={"password"} value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+                    <label className={"label"} htmlFor="password">Mot de passe</label>
+                </div>
+                <button className={"login-button"} onClick={submitLogin}>Connexion</button>
+            </div>
         </div>
     )
 }

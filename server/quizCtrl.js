@@ -18,10 +18,16 @@ module.exports = {
         let { name, info } = req.body;
         const db = req.app.get('db');
 
-        db.query(`INSERT INTO quizes (user_id, quiz_name, info) VALUES (${id}, ${name}, ${info});`+
-            `select * from quizes where quiz_name = ${name}`,(err,results)=>{
+        db.query(`INSERT INTO quizes (user_id, quiz_name, info) VALUES (${id}, '${name}', '${info}');`,(err,results)=>{
             if (!err){
-                res.status(200).send(results)
+                db.query(`select * from quizes where quiz_name = '${name}'`,(error,results2)=>{
+                    if (!error){
+                        res.status(200).send(results2)
+                    }
+                    else{
+                        res.status(500).send(err)
+                    }
+                })
             }
             else{
                 res.status(500).send(err)
