@@ -74,9 +74,7 @@ class Landing extends Component {
                 }
                 <div className='logo-host' >
                     <Link to={"/host"}>
-                        <div className='btn-host' >
-                            <a id='atag'>Organisateur</a>
-                        </div>
+                            <p className='btn-host'>Organisateur</p>
                     </Link>
                 </div>
             </div>

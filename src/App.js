@@ -16,7 +16,7 @@ import './reset.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className={"body"}>
         <Switch>
           
           <Route path='/' exact component={Landing} />

@@ -43,14 +43,10 @@
   .btn-enter{
     display: block;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    border: 2px currentColor solid;
     border-radius: 2px;
-    color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    background-color: #333;
-    background-image: linear-gradient(to bottom,#333,#333);
-    background-repeat: repeat-x;
-    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
-    background-position: 0;
+    color: #8B76A5;
+    background-color: transparent;
     width: 100%;
     height: 50px;
     font-weight: 700;
@@ -62,22 +58,15 @@
   .btn-host{
     display: block;
     text-align: center;
-    padding-top: 12px;
     border-radius: 2px;
-    background-color: #333;
-    background-image: linear-gradient(to bottom,#333,#333);
-    background-repeat: repeat-x;
-    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
-    background-position: 0;
-    width: 250px;
-    height: 50px;
+    border: currentColor 2px solid;
+    color: #E97A7A;
+    background-color: transparent;
+    vertical-align: center;
     box-sizing: border-box;
-  }
-  #atag{
-    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
-    color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 1rem 3rem;
     font-weight: 700;
     font-size: 20px;
   }
