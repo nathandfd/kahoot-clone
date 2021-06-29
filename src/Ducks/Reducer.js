@@ -3,9 +3,9 @@ const initialState = {
     nickname: '',
     selectedPin: 0,
     quizToEdit: {},
-    connected:false,
-    requestUrl:'http://localhost:3030'
-    // requestUrl:'http://192.168.1.29:3030'
+    connected:false,//TODO change to false
+    // requestUrl:'http://localhost:3030'
+    requestUrl:'http://192.168.1.29:3030'
 }
 
 const SELECTED_QUIZ = 'SELECTED_QUIZ'

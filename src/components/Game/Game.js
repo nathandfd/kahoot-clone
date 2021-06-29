@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
 import {getApiRequestUrl} from "../../Ducks/Reducer";
+import Generique from '../../Assests/sounds/generique.mp3'
 
 class Game extends Component {
     constructor() {
@@ -51,6 +52,7 @@ class Game extends Component {
             this.setState({
                 isLive: true
             })
+            this.playBackgroundSound()
         } else {
             alert('Vous avez besoin d\'au moins 3 joueurs pour commencer')
         }
@@ -159,6 +161,15 @@ class Game extends Component {
         this.setState({
             leaderBoard: leaderboard
         })
+    }
+
+    playBackgroundSound() {
+        let music = new Audio(Generique)
+        music.load()
+        music.addEventListener('canplaythrough', () => {
+            music.play()
+        })
+
     }
 
     render() {

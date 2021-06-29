@@ -45,7 +45,7 @@ export default class Timer extends Component {
         seconds: seconds,
       });
       
-      if (seconds == 0) { 
+      if (seconds == 0) {
         clearInterval(this.timer);
       }
     }
@@ -53,7 +53,7 @@ export default class Timer extends Component {
     render() {
       return(
         <div className='timer'>
-         Seconds Left: {this.state.time.s}
+         Temps restant: {this.state.time.s}
         </div>
       );
     }

@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { handleNickname, selectedPin } from '../../Ducks/Reducer';
 import './Landing.css';
 import Kwizz from '../../Assests/Kwizz.svg'
-import Kwizzard from '../../Assests/Kwizzard--test-pixel.svg'
-import Stars from '../animations/Stars.js';
+import LogoVenom from '../../Assests/venom_logo.png'
 
 
 class Landing extends Component {
@@ -52,7 +51,7 @@ class Landing extends Component {
                         ?
                         <div className='landing-wrapper' >
                             <div className='logo-container' >
-                                <h1>MyKwizz !</h1>
+                                <img src={LogoVenom} alt="Logo venom"/>
                             </div> 
                             <div className='player-input-wrapper' >
                                 <input type='number' value={this.state.pin} placeholder='Code PIN Kwizz' onChange={this.handleInput} className='input-user'/>
@@ -62,10 +61,10 @@ class Landing extends Component {
                         :
                         <div className='landing-wrapper' >
                           <div className='logo-container' >
-                            <img src={Kwizz} alt='Kwizz logo' className='logo'/>
+                              <img src={LogoVenom} alt="Logo venom"/>
                           </div> 
                             <div>
-                                <input type='text' value={this.state.nickname} placeholder='Pseudo' onChange={this.handleNicknameInput} className='input-user' />
+                                <input type='text' maxLength={10} value={this.state.nickname} placeholder='Pseudo (10 caractères max)' onChange={this.handleNicknameInput} className='input-user' />
                                 <Link to='/player'>
                                     <button onClick={this.handleGo} className='btn-enter' >OK, c'est parti !</button>
                                 </Link>

@@ -6,6 +6,7 @@ import PlayerQuestionOver from './Player_Question_Over';
 import './Game.css';
 import load from '../../Assests/load-circle-outline.svg'
 import {getApiRequestUrl} from "../../Ducks/Reducer";
+import {Link} from "react-router-dom";
 
 class Player extends Component {
     constructor() {
@@ -57,13 +58,16 @@ class Player extends Component {
         let { gameStarted, questionOver, answerSubmitted } = this.state;
         return (
             <div className='player-container' >
-                <div className='status-bar'>
+                <div className='status-bar status-bar-top'>
                     <p className='player-info' id='pin' >PIN: {this.props.selectedPin}</p>
+                    <Link to={"/"}>
+                        <p id={"homelink"} className={"status-bar-item"}>&larr; Accueil</p>
+                    </Link>
                 </div> 
                 {
                     !gameStarted && !questionOver
                     ?
-                    <div>
+                    <div className={"main-container"}>
                             <p>Vous y êtes !
                              <br />
                                 Pouvez-vous voir votre pseudo sur l'écran ?
@@ -83,7 +87,7 @@ class Player extends Component {
                         gameStarted && !questionOver && answerSubmitted
                         ?
                         <div className='waiting-for-results' >
-                            <p className='answer-indicator' id= 'too-fast'>Did You answer too fast????</p>
+                            <p className='answer-indicator' id= 'too-fast'>N'aurais-tu pas répondu trop vite ?</p>
                             <img src={load} alt='' className='load-circle' />
                         </div> 
                         :
@@ -91,19 +95,19 @@ class Player extends Component {
                          answeredCorrect={this.state.answeredCorrect}
                         />
                     }
-                    <div className='status-bar' >
-                    
-                    <p className='player-info'>{this.props.nickname}</p>
-                    <div 
-                        className={ 
-                          gameStarted && !questionOver && answerSubmitted
-                          ?
-                          'status-bar-hidden'
-                          :
-                          'status-bar-score'
-                        }
-                         >{this.state.score}</div> 
-                    </div> 
+                    <div className='status-bar status-bar-bottom'>
+                        <p className='player-info status-bar-item'>{this.props.nickname}</p>
+                        <div
+                            className={
+                              gameStarted && !questionOver && answerSubmitted
+                              ?
+                              'status-bar-hidden status-bar-item'
+                              :
+                              'status-bar-score status-bar-item'
+                            }
+                             >{this.state.score}
+                        </div>
+                    </div>
             </div>
         )
     }

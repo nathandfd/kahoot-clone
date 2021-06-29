@@ -1,3 +1,18 @@
+:root{
+    --primary-color: #B9C0D5;
+    --dark-color: #333333;
+}
+
+#back-button{
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#back-button:hover{
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
 .body{
     display: flex;
     flex-direction: column;
@@ -6,10 +21,12 @@
     min-height: 100vh;
     width: 100%;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
+    background-color: var(--dark-color);
 }
 
 .title{
     font-size: 3em;
+    color: var(--primary-color);
 }
 
 .form{
@@ -26,10 +43,11 @@
 
 .label{
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 0px;
+    left: 2px;
     pointer-events: none;
     transition-duration: .2s;
+    color: var(--primary-color);
 }
 
 input:focus + .label, input:not(:placeholder-shown) + label{
@@ -44,21 +62,30 @@ input:focus + .label, input:not(:placeholder-shown) + label{
     width: 12rem;
     height: 1.5rem;
     border: none;
-    border-bottom: 2px solid #333333;
+    border-bottom: 2px solid currentColor;
     font-size: 1em;
+    background-color: transparent;
+    color: var(--primary-color);
 }
 
 .login-button{
     width: 12rem;
     height: 2rem;
-    border: 2px solid #333333;
+    border: 2px solid #8B76A5;
+    color: #8B76A5;
     background-color: transparent;
     font-size: 1.2rem;
     transition-duration: .2s;
+    margin-top: 1rem;
 }
 
 .login-button:hover{
-    background-color: #333333;
-    color: white;
     cursor: pointer;
+    background-color: #8B76A5;
+    color: var(--dark-color);
+}
+
+.error-message{
+    color: #E97A7A;
+    margin-top: 2rem;
 }
