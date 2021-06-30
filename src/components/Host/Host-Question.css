@@ -26,10 +26,6 @@
     padding-top: 40px;
 }
 
-#add-question-btn{
-    width: 200px;
-    height: 60px;
-}
 .add-quesiton-div{
     width: 100%;
     display: flex;
@@ -39,6 +35,7 @@
 
 .mapped-questions{
     display: grid;
+    flex: 1 1 0;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2em; 
     margin-bottom: 200px;
@@ -51,7 +48,7 @@
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-    height: 400px
+    flex: 1 1 0;
 }
 .kwizz-container-edit{
     height: 175px;
@@ -76,4 +73,14 @@
     box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
     background-color: rgba(255, 255, 255, 0.281);
     border-radius: 4px;
+    padding: 0 1rem;
+}
+
+.question-container h1{
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.question-container ul li{
+    margin: .5rem 0;
 }

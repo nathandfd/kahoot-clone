@@ -53,30 +53,30 @@ export default class New_Question extends Component {
             </Link>
             <br/>
     <div className='new-question-wrapper'>
-                <div className='new-q'>
+                <div className='new-q input-container'>
+                    <input placeholder={" "} onChange={(e) => this.setState({ question: e.target.value })} />
                     <label>Question</label>
-                    <input onChange={(e) => this.setState({ question: e.target.value })} />
                 </div>
             
-                  <div className='new-q'> 
-                    <label>Réponse 1 : </label>
-                        <input onChange={(e) => this.setState({ answer1: e.target.value })} height='100'/>
+                  <div className='new-q input-container'>
+                      <input placeholder={" "} onChange={(e) => this.setState({ answer1: e.target.value })} height='100'/>
+                      <label>Réponse 1 </label>
                 </div>
-                <div className='new-q'>
-                    <label>Réponse 2 : </label>
-                        <input onChange={(e) => this.setState({ answer2: e.target.value })} />
+                <div className='new-q input-container'>
+                    <input placeholder={" "} onChange={(e) => this.setState({ answer2: e.target.value })} />
+                    <label>Réponse 2 </label>
                 </div>
-                <div className='new-q'>
-                    <label>Réponse 3 : </label>
-                        <input onChange={(e) => this.setState({ answer3: e.target.value })} />
+                <div className='new-q input-container'>
+                    <input placeholder={" "} onChange={(e) => this.setState({ answer3: e.target.value })} />
+                    <label>Réponse 3 </label>
                </div>
-                <div className='new-q'>
-                    <label>Réponse 4 : </label>
-                        <input onChange={(e) => this.setState({ answer4: e.target.value })} />
+                <div className='new-q input-container'>
+                    <input placeholder={" "} onChange={(e) => this.setState({ answer4: e.target.value })} />
+                    <label>Réponse 4 </label>
                 </div>
-                <div className='new-q'>
-                    <label>Bonne réponse : </label>
-                    <input type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
+                <div className='new-q input-container'>
+                    <input placeholder={" "} type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
+                    <label>Bonne réponse </label>
                 </div>
                     <div className='next'>
                         <button onClick={this.addQuestion}  className='btn-new'>Valider</button>

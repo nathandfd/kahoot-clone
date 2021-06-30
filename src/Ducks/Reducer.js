@@ -5,7 +5,8 @@ const initialState = {
     quizToEdit: {},
     connected:false,//TODO change to false
     // requestUrl:'http://localhost:3030'
-    requestUrl:'http://192.168.1.29:3030'
+    //requestUrl:'http://192.168.1.29:3030'
+    requestUrl:`http://${window.location.hostname}:3030`
 }
 
 const SELECTED_QUIZ = 'SELECTED_QUIZ'

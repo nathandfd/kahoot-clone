@@ -75,11 +75,11 @@ class Questions extends Component {
                     <div key={question.id} className='question-container'>
                         <h1>{question.question}</h1>
                         <ul>
-                            <li>1: {question.answer1}</li>
-                            <li>2: {question.answer2}</li>
-                            <li>3: {question.answer3}</li>
-                            <li>4: {question.answer4}</li>
-                            <li>Correct: {question.correctAnswer}</li>
+                            <li>Réponse 1 : {question.answer1}</li>
+                            <li>Réponse 2 : {question.answer2}</li>
+                            <li>Réponse 3 : {question.answer3}</li>
+                            <li>Réponse 4 : {question.answer4}</li>
+                            <li>Bonne réponse : {question.correctAnswer}</li>
 
                         </ul>
                         <div className='btn-container-edit' >

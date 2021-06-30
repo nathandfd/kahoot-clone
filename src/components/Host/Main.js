@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {selectedQuiz, editingQuiz, getApiRequestUrl, setConnected} from '../../Ducks/Reducer';
 import './Host.css';
-import Kwizz from '../../Assests/Kwizz.svg';
+import LogoVenom from "../../Assests/venom_logo.png";
  
 class Main extends Component {
     constructor(){
@@ -45,9 +45,6 @@ class Main extends Component {
     }
 
     render() {
-        if (!this.props.isConnected){
-            return <Redirect to="/login"/>
-        }
         if (this.state.redirect){
            return <Redirect to='/game'/>
         }
@@ -59,10 +56,10 @@ class Main extends Component {
                         <p className='kwizz-info kwizz-desc'>{quiz.info}</p>
                     <div className='btn-container' >
                         <button onClick={() => this.setRedirect(quiz)} className='btn-play' >Jouer</button>
-                        <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-play' >Supprimer</button>
                     <Link to='/host/questions'>
                         <button onClick={()=> this.props.editingQuiz(quiz)} className='btn-play' >Modifier</button>
                     </Link>
+                        <button onClick={() =>  this.deleteQuiz(quiz.id)} className='btn-delete' >Supprimer</button>
                     </div> 
                 </div> 
             )
@@ -70,7 +67,7 @@ class Main extends Component {
         return (
             <div className='mapped-container' >
                 <div className='host-logo-container'>
-                    <h1>MyKwizz</h1>
+                    <img src={LogoVenom} alt="Logo venom"/>
                 </div> 
                 <div className='newKwizz' >
                     <Link to='/host/newquiz' className='btn-link'>

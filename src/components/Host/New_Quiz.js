@@ -42,10 +42,14 @@ class New_Quiz extends Component {
         return (
             <div className='mapped-container' >
                 <div className='new-kwizz-form' >
-                    <label className='kwizz-desc kwizz-info' >Titre du nouveau Kwizz</label>
-                    <input placeholder={"Titre du nouveau Kwizz"} className='title-input' onChange={this.handleInput} type='text'/>
-                    <label className='kwizz-desc kwizz-info'>Description</label>
-                    <textarea placeholder={"Description de votre nouveau kwizz"} className='desc-input' onChange={this.handleTextarea}></textarea>
+                    <div className={"input-container"}>
+                        <input placeholder={" "} className='title-input' onChange={this.handleInput} type='text'/>
+                        <label className='kwizz-desc kwizz-info' >Titre du nouveau Kwizz</label>
+                    </div>
+                    <div className={"input-container"}>
+                        <input placeholder={" "} className='desc-input' onChange={this.handleTextarea}></input>
+                        <label className='kwizz-desc kwizz-info'>Description du kwizz</label>
+                    </div>
                     <div className='kwizz-info ok-go-div' >
                         <button onClick={this.createQuiz} className='btn-play  ok-go' >Valider</button>
                     </div> 

@@ -28,6 +28,10 @@
     border-radius: 2px;
 }
 
+#pin{
+    margin-left: 1rem;
+}
+
 /* shapes------------------------------------ */
 .q1{
     background-color: #e91b1b;
@@ -293,18 +297,14 @@
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     border-radius: 2px;
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    background-color: #333;
-    background-image: linear-gradient(to bottom,#333,#333);
-    background-repeat: repeat-x;
-    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
-    background-position: 0;
+    background-color: #8B76A5;
+    border: none;
     width: 200px;
-    height: 50px;
     font-weight: 700;
     font-size: 20px;
     position: relative;
     z-index: 100;
+    margin: 1rem auto;
 }
 
 .leaderBoard {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import Landing from './components/Landing/Landing';
 import Main from './components/Host/Main';
 import New_Quiz from './components/Host/New_Quiz'
@@ -11,6 +11,7 @@ import Edit_Question from './components/Host/Edit_Question';
 import Connexion from "./components/Host/Connexion";
 import './App.css';
 import './reset.css';
+import {connect} from "react-redux";
 
 
 class App extends Component {
@@ -20,19 +21,32 @@ class App extends Component {
         <Switch>
           
           <Route path='/' exact component={Landing} />
-          <Route path='/game' component={Game} />
-          <Route path='/host' exact component={Main} />
-          <Route path='/host/newQuiz' component={New_Quiz} />
-          <Route path='/host/questions' component={Questions} />
-          <Route path='/host/newquestion/:id' component={New_Question} />
-          <Route path='/host/editquestion/:id' component={Edit_Question} />
           <Route path='/player' component={Player} />
           <Route path='/login' component={Connexion} />
+          {
+            this.props.isConnected ?
+                <div>
+                  <Route path='/game' component={Game} />
+                  <Route path='/host' exact component={Main} />
+                  <Route path='/host/newQuiz' component={New_Quiz} />
+                  <Route path='/host/questions' component={Questions} />
+                  <Route path='/host/newquestion/:id' component={New_Question} />
+                  <Route path='/host/editquestion/:id' component={Edit_Question} />
+                </div>
+                :
+                <Redirect to="/login"/>
 
+          }
         </Switch>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state=>(
+    {
+      isConnected:state.connected
+    }
+)
+
+export default connect(mapStateToProps, null)(App);
