@@ -1,9 +1,9 @@
 import React from 'react';
 import './Game.css';
-import triangle from '../../Assests/triangle.svg'
-import diamond from '../../Assests/diamond.svg'
-import square from '../../Assests/square.svg'
-import circle from '../../Assests/circle.svg'
+import triangle from '../../Assests/spider-man-logo.png'
+import diamond from '../../Assests/captain-america-logo.png'
+import square from '../../Assests/iron-man-logo.png'
+import circle from '../../Assests/hulk-logo.png'
 
 export default function PlayerQuestion(props){
     return (
