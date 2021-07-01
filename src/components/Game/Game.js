@@ -8,12 +8,14 @@ import {getApiRequestUrl} from "../../Ducks/Reducer";
 import Generique from '../../Assests/sounds/generique.mp3'
 import Timer from "./Timer";
 
+const timer = 20
+
 class Game extends Component {
     constructor() {
         super();
         this.state = {
             pin: 0,
-            timer: 200000000000,
+            timer: timer,
             isLive: false,
             questionOver: false,
             gameOver: false,
@@ -72,7 +74,7 @@ class Game extends Component {
         this.setState({
             questionOver: true,
             currentQuestion: this.state.currentQuestion + 1,
-            timer: 20,
+            timer: timer,
             players: updatedPlayers
         })
     }
