@@ -220,7 +220,7 @@ class Game extends Component {
                             <GameQuestionOver 
                                 nextQuestion={this.nextQuestion} 
                                 leaderboard={this.state.leaderBoard}
-                                answer={questions[currentQuestion].correctAnswer}
+                                answer={questions[currentQuestion-1][`answer${questions[currentQuestion-1].correctAnswer}`]}
                                 lastQuestion={this.state.questions.length === this.state.currentQuestion}  />
                 }
             </div>
