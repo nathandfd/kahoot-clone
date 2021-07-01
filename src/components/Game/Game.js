@@ -13,7 +13,7 @@ class Game extends Component {
         super();
         this.state = {
             pin: 0,
-            timer: 20,
+            timer: 200000000000,
             isLive: false,
             questionOver: false,
             gameOver: false,
