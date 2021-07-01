@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import TenSecLeft from '../../Assests/sounds/10sec_left.wav'
+import Gong from '../../Assests/sounds/gong.mp3'
+import './Timer.css'
 
 export default class Timer extends Component {
     constructor() {
       super();
-      this.state = { time: {}, seconds: 20 };
-      this.timer = 0;
-      this.startTimer = this.startTimer.bind(this);
-      this.countDown = this.countDown.bind(this);
+      this.state = {
+          audio:"",
+          gong:"",
+          textColor:"normal",
+          time:{}
+      };
     }
   
     secondsToTime(secs){
@@ -23,37 +28,57 @@ export default class Timer extends Component {
         "m": minutes,
         "s": seconds
       };
+
+      if (JSON.stringify(obj)!== JSON.stringify(this.state.time)){
+          this.setState({
+              time:obj
+          })
+      }
+
       return obj;
     }
   
     componentDidMount() {
-      let timeLeftVar = this.secondsToTime(this.state.seconds);
-      this.setState({ time: timeLeftVar });
-      this.startTimer()
+        let music = new Audio(TenSecLeft)
+        let gong = new Audio(Gong)
+        music.load()
+        gong.load()
+        music.addEventListener('canplaythrough', () => {
+            this.setState({
+                audio:music
+            })
+        })
+        gong.addEventListener('canplaythrough', () => {
+            this.setState({
+                gong:gong
+            })
+        })
     }
-  
-    startTimer() {
-      if (this.timer == 0) {
-        this.timer = setInterval(this.countDown, 1000);
-      }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!prevState.time.h && !prevState.time.m && prevState.time.s === 11){
+            this.setState({
+                textColor:"danger"
+            })
+            if (this.state.audio){
+                this.state.audio.play()
+            }
+        }
     }
-  
-    countDown() {
-      let seconds = this.state.seconds - 1;
-      this.setState({
-        time: this.secondsToTime(seconds),
-        seconds: seconds,
-      });
-      
-      if (seconds == 0) {
-        clearInterval(this.timer);
-      }
+
+    componentWillUnmount() {
+        if (this.state.audio){
+            this.state.audio.pause()
+        }
+        if (this.state.gong){
+            this.state.gong.play()
+        }
     }
-  
+
     render() {
       return(
-        <div className='timer'>
-         Temps restant: {this.state.time.s}
+        <div className={`timer ${this.state.textColor}`}>
+         Temps restant: {this.secondsToTime(this.props.time).s}
         </div>
       );
     }

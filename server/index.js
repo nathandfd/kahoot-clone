@@ -73,6 +73,10 @@ io.on('connection', socket => {
         io.to(data.id).emit('sent-info', {answeredCorrect: data.answeredCorrect, score: data.score});
     })
 
+    socket.on('disconnect', ()=>{
+        io.emit('room-left', {id: socket.id});
+    })
+
 })
 
 app.use(express.static(`${__dirname}/../build`))

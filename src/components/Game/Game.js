@@ -6,6 +6,7 @@ import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
 import {getApiRequestUrl} from "../../Ducks/Reducer";
 import Generique from '../../Assests/sounds/generique.mp3'
+import Timer from "./Timer";
 
 class Game extends Component {
     constructor() {
@@ -28,12 +29,14 @@ class Game extends Component {
     componentDidMount() {
         axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quiz.id}`, {withCredentials:true}).then(res => {
             this.setState({ questions: res.data })
-            console.log(this.questions)
         })
         this.socket = io(`${getApiRequestUrl()}/`);
         this.generatePin();
         this.socket.on('room-joined', data => {
             this.addPlayer(data.name, data.id)
+        })
+        this.socket.on('room-left', data => {
+            this.removePlayer(data.id)
         })
         this.socket.on('player-answer', data => {
             this.submitAnswer(data.name, data.answer)
@@ -46,15 +49,15 @@ class Game extends Component {
     }
     startGame() {
         let { players } = this.state;
-        if (players[0] //&& players[1] && players[2]
+        if (players[0] && players[1]
         ) {
             this.nextQuestion()
             this.setState({
                 isLive: true
             })
-            this.playBackgroundSound()
+            //this.playBackgroundSound()
         } else {
-            alert('Vous avez besoin d\'au moins 3 joueurs pour commencer')
+            alert('Vous avez besoin d\'au moins 2 joueurs pour commencer')
         }
     }
     questionOver() {
@@ -74,7 +77,6 @@ class Game extends Component {
         })
     }
     timeKeeper() {
-        let internalTimer = 20;
         let players = [...this.state.players]
 
         this.setState({ questionOver: false })
@@ -89,19 +91,21 @@ class Game extends Component {
                 })
                 players.forEach(player => {
                     if(player.answeredCorrect){
-                        player.score += (internalTimer*10 +1000)
+                        player.score += (this.state.timer*10 +1000)
                         this.socket.emit('sent-info', { id: player.id, score: player.score, answeredCorrect: player.answeredCorrect })
                     }
                     
                 });
-                pAnswered === players.length ? internalTimer=0 : null
-                internalTimer-=1;
+                pAnswered === players.length ? this.state.timer=0 : null
+                this.setState({
+                    timer:this.state.timer -= 1
+                })
             }
             let endQuestion = ()=>{
                 clearInterval(timeKept);
                 this.questionOver();
             }
-            return internalTimer > 0 
+            return this.state.timer > 0
             ? checkAnswers()
             : endQuestion()
         }
@@ -113,8 +117,7 @@ class Game extends Component {
         let { pin, questions, currentQuestion } = this.state;
         this.timeKeeper();
         // this.hotTimer();
-        console.log(questions)
-        currentQuestion === questions.length 
+        currentQuestion === questions.length
             ? this.setState({ gameOver: true })
             : 
             this.socket.emit('next-question', { pin })
@@ -131,11 +134,21 @@ class Game extends Component {
         }
         let newPlayers = [...this.state.players]
         newPlayers.push(player)
-        // console.log(newPlayers)
         this.setState({
             players: newPlayers,
             playerCounter: this.state.playerCounter + 1
         })
+    }
+
+    removePlayer(id) {
+        let playersList = [...this.state.players]
+        let newPlayersList = playersList.filter(element => element.id !== id)
+        if (playersList.length !== newPlayersList.length){
+            this.setState({
+                players: newPlayersList,
+                playerCounter: this.state.playerCounter - 1
+            })
+        }
     }
 
     submitAnswer(name, answer) {
@@ -157,7 +170,6 @@ class Game extends Component {
     getLeaderBoard() {
         let unsorted = [...this.state.players];
         let leaderboard = unsorted.sort((a, b) => b.score - a.score)
-        console.log(leaderboard)
         this.setState({
             leaderBoard: leaderboard
         })
@@ -173,7 +185,6 @@ class Game extends Component {
     }
 
     render() {
-        console.log(this.state)
         let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
         let mappedPlayers = this.state.players.map(player => {
             return (
@@ -195,17 +206,21 @@ class Game extends Component {
                         </div>
                         :
                         isLive && !questionOver && !gameOver ?
-                            <GameQuestions
-                                question={questions[currentQuestion].question}
-                                answer1={questions[currentQuestion].answer1}
-                                answer2={questions[currentQuestion].answer2}
-                                answer3={questions[currentQuestion].answer3}
-                                answer4={questions[currentQuestion].answer4}
-                                questionOver={this.questionOver} />
+                            <div>
+                                <Timer time={this.state.timer} />
+                                <GameQuestions
+                                    question={questions[currentQuestion].question}
+                                    answer1={questions[currentQuestion].answer1}
+                                    answer2={questions[currentQuestion].answer2}
+                                    answer3={questions[currentQuestion].answer3}
+                                    answer4={questions[currentQuestion].answer4}
+                                    questionOver={this.questionOver} />
+                            </div>
                             :
                             <GameQuestionOver 
                                 nextQuestion={this.nextQuestion} 
-                                leaderboard={this.state.leaderBoard} 
+                                leaderboard={this.state.leaderBoard}
+                                answer={questions[currentQuestion].correctAnswer}
                                 lastQuestion={this.state.questions.length === this.state.currentQuestion}  />
                 }
             </div>

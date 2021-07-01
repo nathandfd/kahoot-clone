@@ -1,5 +1,4 @@
 import React from 'react';
-import Timer from './Timer';
 import './Game.css';
 import triangle from '../../Assests/triangle.svg'
 import diamond from '../../Assests/diamond.svg'
@@ -9,7 +8,6 @@ import circle from '../../Assests/circle.svg'
 export default function GameQuestions(props){
     return(
         <div className='questions-container' >
-            <Timer/>
             <h1 className='player-name'>{props.question}</h1>
             <div className='questions-grid' >
                 <div className='question q1'>
