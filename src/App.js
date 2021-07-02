@@ -12,7 +12,7 @@ import Connexion from "./components/Host/Connexion";
 import './App.css';
 import './reset.css';
 import {connect} from "react-redux";
-
+import GameOver from "./components/Game/Game_Over";
 
 class App extends Component {
   render() {

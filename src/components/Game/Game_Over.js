@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './Game.css';
+import anime from "animejs";
 
 export const Leaderboard = ({leaderboard})=>{
     return(
@@ -44,6 +45,16 @@ export const Leaderboard = ({leaderboard})=>{
 }
 
 export default function GameOver(props){
+
+    useEffect(()=>{
+        anime({
+            targets:'ul li',
+            scale:[0,1],
+            opacity:[.5, 1],
+            delay:anime.stagger(200),
+        })
+    },[])
+
     return(
         <div className='game-over'>
             <h1 className='leaderBoard-title'>Kwizz terminé</h1>

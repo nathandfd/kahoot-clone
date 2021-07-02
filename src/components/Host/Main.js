@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {selectedQuiz, editingQuiz, getApiRequestUrl, setConnected} from '../../Ducks/Reducer';
 import './Host.css';
 import LogoVenom from "../../Assests/venom_logo.png";
+import anime from "animejs";
  
 class Main extends Component {
     constructor(){
@@ -24,6 +25,13 @@ class Main extends Component {
         axios.get(`${getApiRequestUrl()}/api/getQuizzes`,{withCredentials: true}).then(res => {
             this.setState({
                 quizzes: res.data
+            })
+            anime({
+                targets:'.kwizz-container',
+                scale:[0,1],
+                opacity:[.5, 1],
+                delay:anime.stagger(100),
+                easing:"easeOutExpo"
             })
         })
     }
