@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Zoom from '../../components/animations/zoomin.js';
 import './Game.css';
 
 export const Leaderboard = ({leaderboard})=>{
