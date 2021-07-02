@@ -297,6 +297,7 @@
 /*GAME OVER--------------------------------------*/
 
 .game-over {
+    margin-top: 5rem;
     text-align: center;
     color: #fff;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;

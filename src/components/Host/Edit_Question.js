@@ -17,7 +17,8 @@ export default class Edit_Question extends Component {
             answer2: '',
             answer3: '',
             answer4: '',
-            correctAnswer: ''
+            correctAnswer: '',
+            questionTime:''
         }
     }
     componentDidMount() {
@@ -33,15 +34,16 @@ export default class Edit_Question extends Component {
                 answer2: question.answer2,
                 answer3: question.answer3,
                 answer4: question.answer4,
-                correctAnswer: question.correctanswer,
+                correctAnswer: question.correctAnswer,
+                questionTime: question.questionTime,
                 redirect: false
             })
         })
     }
     updateQuestion() {
-        let { question, answer1, answer2, answer3, answer4, correctAnswer, id } = this.state;
+        let { question, answer1, answer2, answer3, answer4, correctAnswer, id, questionTime} = this.state;
         if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer && id) {
-            axios.put(`${getApiRequestUrl()}/api/updatequestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }, {withCredentials:true}).then(res => {
+            axios.put(`${getApiRequestUrl()}/api/updatequestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, questionTime, id }, {withCredentials:true}).then(res => {
                 if (res.status === 200) {
                     this.setState({
                         redirect: true
@@ -93,6 +95,10 @@ export default class Edit_Question extends Component {
             <div className='new-q'>
                 <label>Bonne réponse</label>
                 <input type='number' value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
+            </div>
+            <div className='new-q'>
+                <label>Temps pour la question</label>
+                <input type='number' value={this.state.questionTime} onChange={(e) => this.setState({ questionTime: e.target.value })} />
                 <button onClick={() => this.updateQuestion()}>Enregistrer</button>
             </div>
 

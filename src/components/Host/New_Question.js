@@ -16,15 +16,16 @@ export default class New_Question extends Component {
             answer3: '',
             answer4: '',
             correctAnswer: 0,
+            questionTime: 20,
             redirect: false
         }
         this.addQuestion = this.addQuestion.bind(this)
     }
     addQuestion() {
-        let { question, answer1, answer2, answer3, answer4, correctAnswer } = this.state;
+        let { question, answer1, answer2, answer3, answer4, correctAnswer, questionTime } = this.state;
         let { id } = this.props.match.params
-        if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer) {
-            axios.post(`${getApiRequestUrl()}/api/newquestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, id }, {withCredentials:true}).then(res => {
+        if (question && answer1 && answer2 && answer3 && answer4 && correctAnswer && questionTime) {
+            axios.post(`${getApiRequestUrl()}/api/newquestion`, { question, answer1, answer2, answer3, answer4, correctAnswer, questionTime, id }, {withCredentials:true}).then(res => {
 
                 if (res.status === 200) {
                     this.setState({
@@ -77,6 +78,10 @@ export default class New_Question extends Component {
                 <div className='new-q input-container'>
                     <input placeholder={" "} type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
                     <label>Bonne réponse </label>
+                </div>
+                <div className='new-q input-container'>
+                    <input placeholder={" "} value={this.state.questionTime} type='number' min='10' max='120' onChange={(e) => this.setState({ questionTime: e.target.value })} />
+                    <label>Temps pour cette question</label>
                 </div>
                     <div className='next'>
                         <button onClick={this.addQuestion}  className='btn-new'>Valider</button>

@@ -8,14 +8,12 @@ import {getApiRequestUrl} from "../../Ducks/Reducer";
 import BackgroundMusic from '../../Assests/sounds/background-music.mp3'
 import Timer from "./Timer";
 
-const timer = 20
-
 class Game extends Component {
     constructor() {
         super();
         this.state = {
             pin: 0,
-            timer: timer,
+            timer: 0,
             isLive: false,
             questionOver: false,
             gameOver: false,
@@ -81,7 +79,6 @@ class Game extends Component {
         this.setState({
             questionOver: true,
             currentQuestion: this.state.currentQuestion + 1,
-            timer: timer,
             players: updatedPlayers
         })
     }
@@ -130,7 +127,12 @@ class Game extends Component {
             ? this.setState({ gameOver: true })
             : 
             this.socket.emit('next-question', { pin })
-            this.setState({questionOver:false})      
+            this.setState(
+                {
+                    questionOver:false,
+                    timer: this.state.questions[this.state.currentQuestion].questionTime,
+                }
+            )
     }
 
     addPlayer(name, id) {
@@ -207,10 +209,13 @@ class Game extends Component {
         })
         return (
             <div className='component-container' >
-                <div className='pin'>
-                <p id='player-pin'>Code PIN du Kwizz</p>
-                <h1>{pin}</h1>
-                </div> 
+                {
+                    (this.state.questions.length !== this.state.currentQuestion) &&
+                    <div className='pin'>
+                        <p id='player-pin'>Code PIN du Kwizz</p>
+                        <h1>{pin}</h1>
+                    </div>
+                }
                 {
                     !isLive && !questionOver && !gameOver ?
                         <div className='btn-players' >

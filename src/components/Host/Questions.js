@@ -80,7 +80,7 @@ class Questions extends Component {
                             <li>Réponse 3 : {question.answer3}</li>
                             <li>Réponse 4 : {question.answer4}</li>
                             <li>Bonne réponse : {question.correctAnswer}</li>
-
+                            <li>Temps : {question.questionTime}s</li>
                         </ul>
                         <div className='btn-container-edit' >
                             <Link to={`/host/editquestion/${question.id}`}>

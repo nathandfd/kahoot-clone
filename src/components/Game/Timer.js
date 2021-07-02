@@ -80,9 +80,9 @@ export default class Timer extends Component {
 
         return(
             <span>
-                {time.h !== 0 && <span>{time.h} H </span>}
-                {time.m !== 0 && <span>{time.m} m </span>}
-                {time.s !== 0 && <span>{time.s} s </span>}
+                {(time.h !== 0 && time.h !== -1) && <span>{time.h} h </span>}
+                {(time.m !== 0 && time.m !== -1) && <span>{time.m} min </span>}
+                {(time.s !== 0 && time.s !== -1)?<span>{time.s} s </span>:<span>Terminé</span>}
             </span>
         )
     }

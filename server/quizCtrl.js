@@ -61,12 +61,12 @@ module.exports = {
         })
     },
     addQuestion: (req, res) => {
-        let { id, question, answer1, answer2, answer3, answer4, correctAnswer } = req.body;
+        let { id, question, answer1, answer2, answer3, answer4, correctAnswer, questionTime} = req.body;
         const db = req.app.get('db');
         db.query(`INSERT INTO questions
-                      (quiz_id, question, answer1, answer2, answer3, answer4, correctAnswer)
+                      (quiz_id, question, answer1, answer2, answer3, answer4, correctAnswer, questionTime)
                   VALUES
-                      (${id}, '${question}', '${answer1}', '${answer2}', '${answer3}', '${answer4}', ${correctAnswer});`,(err,results)=>{
+                      (${id}, '${question}', '${answer1}', '${answer2}', '${answer3}', '${answer4}', ${correctAnswer}, ${questionTime});`,(err,results)=>{
             if (!err){
                 res.status(200).send(results)
             }
@@ -100,10 +100,10 @@ module.exports = {
         })
     },
     updateQuestion: (req, res) => {
-        let { id, question, answer1, answer2, answer3, answer4, correctAnswer } = req.body;
+        let { id, question, answer1, answer2, answer3, answer4, correctAnswer, questionTime } = req.body;
         const db = req.app.get('db');
         db.query(`update questions
-            set question = '${question}', answer1 = '${answer1}', answer2 = '${answer2}', answer3 = '${answer3}', answer4 = '${answer4}', correctAnswer = ${correctAnswer}
+            set question = '${question}', answer1 = '${answer1}', answer2 = '${answer2}', answer3 = '${answer3}', answer4 = '${answer4}', correctAnswer = ${correctAnswer}, questionTime = ${questionTime}
             where id = ${id}`,(err,results)=>{
             if (!err){
                 res.status(200).send(results)
