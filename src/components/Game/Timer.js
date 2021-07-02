@@ -75,10 +75,22 @@ export default class Timer extends Component {
         }
     }
 
+    renderTimeLeft(){
+        let time = this.secondsToTime(this.props.time)
+
+        return(
+            <span>
+                {time.h !== 0 && <span>{time.h} H </span>}
+                {time.m !== 0 && <span>{time.m} m </span>}
+                {time.s !== 0 && <span>{time.s} s </span>}
+            </span>
+        )
+    }
+
     render() {
       return(
         <div className={`timer ${this.state.textColor}`}>
-         Temps restant: {this.secondsToTime(this.props.time).s}
+         Temps restant: {this.renderTimeLeft()}
         </div>
       );
     }

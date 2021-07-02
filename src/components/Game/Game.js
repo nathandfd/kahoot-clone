@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import GameQuestions from './Game_Questions';
 import GameQuestionOver from './Game_Question_Over';
 import {getApiRequestUrl} from "../../Ducks/Reducer";
-import Generique from '../../Assests/sounds/generique.mp3'
+import BackgroundMusic from '../../Assests/sounds/background-music.mp3'
 import Timer from "./Timer";
 
 const timer = 20
@@ -23,7 +23,8 @@ class Game extends Component {
             questions: [],
             players: [],
             playerCounter: 0,
-            leaderBoard: []
+            leaderBoard: [],
+            music:""
         }
         this.questionOver = this.questionOver.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
@@ -43,7 +44,13 @@ class Game extends Component {
         this.socket.on('player-answer', data => {
             this.submitAnswer(data.name, data.answer)
         })
+        this.playBackgroundSound()
     }
+
+    componentWillUnmount() {
+        this.state.music.pause()
+    }
+
     generatePin() {
         let newPin = Math.floor(Math.random() * 9000, 10000)
         this.setState({ pin: newPin })
@@ -178,8 +185,13 @@ class Game extends Component {
     }
 
     playBackgroundSound() {
-        let music = new Audio(Generique)
+        let music = new Audio(BackgroundMusic)
+        this.setState({
+            music: music
+        })
         music.load()
+        music.loop = true
+        music.volume = 0.2
         music.addEventListener('canplaythrough', () => {
             music.play()
         })
