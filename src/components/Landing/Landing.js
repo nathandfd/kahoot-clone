@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleNickname, selectedPin } from '../../Ducks/Reducer';
 import './Landing.css';
-import Kwizz from '../../Assests/Kwizz.svg'
 import LogoVenom from '../../Assests/venom_logo.png'
 
 

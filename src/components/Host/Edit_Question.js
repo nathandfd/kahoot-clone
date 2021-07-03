@@ -64,42 +64,44 @@ export default class Edit_Question extends Component {
         return (                                        
 // Used a bunch of arrow functions here instead of binding at top - Nate
         <div className='mapped-container'>
-        <Link to='/host/questions' className='btn-link'>
-        &larr; Retour
-        </Link>
-            <div className='new-q'>
-                <label>Question</label>
+            <Link to='/host/questions' className='btn-go-back'>
+                &larr; Retour
+            </Link>
+            <div className='new-q input-container'>
                 <input value={this.state.question} onChange={(e) => this.setState({ question: e.target.value })} />
+                <label>Question</label>
             </div>
                 <br />
-            <div className='new-q'>
-                <label>Réponse 1</label>
+            <div className='new-q input-container'>
                 <input value={this.state.answer1} onChange={(e) => this.setState({ answer1: e.target.value })} />
+                <label>Réponse 1</label>
             </div>
                 <br />
-            <div className='new-q'>
-                <label>Réponse 2</label>
+            <div className='new-q input-container'>
                 <input value={this.state.answer2} onChange={(e) => this.setState({ answer2: e.target.value })} />
+                <label>Réponse 2</label>
             </div>
                 <br />
-            <div className='new-q'>
-                <label>Réponse 3</label>
+            <div className='new-q input-container'>
                 <input value={this.state.answer3} onChange={(e) => this.setState({ answer3: e.target.value })} />
+                <label>Réponse 3</label>
             </div>
                 <br />
-            <div className='new-q'>
-                <label>Réponse 4</label>
+            <div className='new-q input-container'>
                 <input value={this.state.answer4} onChange={(e) => this.setState({ answer4: e.target.value })} />
+                <label>Réponse 4</label>
             </div>
                 <br />
-            <div className='new-q'>
-                <label>Bonne réponse</label>
+            <div className='new-q input-container'>
                 <input type='number' value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
+                <label>Bonne réponse</label>
             </div>
-            <div className='new-q'>
-                <label>Temps pour la question</label>
+            <div className='new-q input-container'>
                 <input type='number' value={this.state.questionTime} onChange={(e) => this.setState({ questionTime: e.target.value })} />
-                <button onClick={() => this.updateQuestion()}>Enregistrer</button>
+                <label>Temps pour la question</label>
+            </div>
+            <div className={"next"}>
+                <button className='btn-new' onClick={() => this.updateQuestion()}>Enregistrer</button>
             </div>
 
             </div>
