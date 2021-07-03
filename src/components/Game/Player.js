@@ -43,7 +43,7 @@ class Player extends Component {
         this.socket.on('sent-info', data => {
             this.setState({
                 answeredCorrect: data.answeredCorrect,
-                score: this.state.score + data.score
+                score: data.score
             })
         })
     }

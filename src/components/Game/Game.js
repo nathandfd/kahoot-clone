@@ -50,7 +50,7 @@ class Game extends Component {
     }
 
     generatePin() {
-        let newPin = Math.floor(Math.random() * 9000, 10000)
+        let newPin = Math.floor(Math.random() * 9000+10000)
         this.setState({ pin: newPin })
         this.socket.emit('host-join', { pin: newPin });
     }
@@ -75,7 +75,6 @@ class Game extends Component {
             player.qAnswered = false;
             player.answeredCorrect = false;
         })
-        this.getLeaderBoard()
         this.setState({
             questionOver: true,
             currentQuestion: this.state.currentQuestion + 1,
@@ -104,7 +103,8 @@ class Game extends Component {
                 });
                 pAnswered === players.length ? this.state.timer=0 : null
                 this.setState({
-                    timer:this.state.timer -= 1
+                    timer:this.state.timer -= 1,
+                    players:players
                 })
             }
             let endQuestion = ()=>{
@@ -124,7 +124,8 @@ class Game extends Component {
         this.timeKeeper();
         // this.hotTimer();
         currentQuestion === questions.length
-            ? this.setState({ gameOver: true })
+            ?
+            this.setState({ gameOver: true })
             : 
             this.socket.emit('next-question', { pin })
             this.setState(
@@ -154,7 +155,7 @@ class Game extends Component {
     removePlayer(id) {
         let playersList = [...this.state.players]
         let newPlayersList = playersList.filter(element => element.id !== id)
-        if (playersList.length !== newPlayersList.length){
+        if ((playersList.length !== newPlayersList.length) && !this.state.gameOver){
             this.setState({
                 players: newPlayersList,
                 playerCounter: this.state.playerCounter - 1
@@ -181,9 +182,7 @@ class Game extends Component {
     getLeaderBoard() {
         let unsorted = [...this.state.players];
         let leaderboard = unsorted.sort((a, b) => b.score - a.score)
-        this.setState({
-            leaderBoard: leaderboard
-        })
+        return leaderboard
     }
 
     playBackgroundSound() {
@@ -202,11 +201,12 @@ class Game extends Component {
 
     render() {
         let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
-        let mappedPlayers = this.state.players.map(player => {
+        let mappedPlayers = this.state.players.length?this.state.players.map(player => {
             return (
                 <p key={player.id} className='player-name' >{player.name}</p>
             )
-        })
+        }):<p className='player-name'>Aucun joueur connecté</p>
+
         return (
             <div className='component-container' >
                 {
@@ -238,7 +238,7 @@ class Game extends Component {
                             :
                             <GameQuestionOver 
                                 nextQuestion={this.nextQuestion} 
-                                leaderboard={this.state.leaderBoard}
+                                leaderboard={this.getLeaderBoard()}
                                 answer={questions[currentQuestion-1][`answer${questions[currentQuestion-1].correctAnswer}`]}
                                 lastQuestion={this.state.questions.length === this.state.currentQuestion}  />
                 }
