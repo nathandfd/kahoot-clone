@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {editingQuiz, getApiRequestUrl} from '../../Ducks/Reducer';
 import './Host-Question.css';
 import './Host.css';
+import anime from "animejs";
 
 class Questions extends Component {
     constructor() {
@@ -28,6 +29,13 @@ class Questions extends Component {
         axios.get(`${getApiRequestUrl()}/api/getquestions/${this.props.quizToEdit.id}`, {withCredentials:true}).then(res => {
             this.setState({
                 questions: res.data,
+            })
+            anime({
+                targets:'.question-container',
+                scale:[0,1],
+                opacity:[.5, 1],
+                delay:anime.stagger(100),
+                easing:"easeOutExpo"
             })
         })
     }
