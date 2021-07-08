@@ -93,7 +93,12 @@ export default class Edit_Question extends Component {
             </div>
                 <br />
             <div className='new-q input-container'>
-                <input type='number' value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
+                <select value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
                 <label>Bonne réponse</label>
             </div>
             <div className='new-q input-container'>

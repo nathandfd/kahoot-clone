@@ -1,10 +1,10 @@
 .background{
     background-color: var(--dark-color);
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: var(--border-radius-xl);
 }
 
 .new-question-wrapper{
@@ -15,19 +15,24 @@
     align-items: center;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     font-weight: 700; 
-    border-radius: 10px;
     padding: 2rem;
 }
 
-.new-q input{
+.new-q input, .new-q select{
     margin-bottom: 3rem;
     width: 20rem;
     height: 1.5rem;
     border: none;
+    border-radius: 0;
     border-bottom: 2px solid currentColor;
     font-size: 1em;
     background-color: transparent;
-    color: white;
+    color: var(--primary-color);
+}
+
+.new-q select{
+    -webkit-appearance: image-controls-button;
+    position: relative;
 }
 
 .answers-wrapper{
@@ -57,7 +62,6 @@
 }
 
 .next{
-
     height:50px;
     justify-content: center;
     display: flex;

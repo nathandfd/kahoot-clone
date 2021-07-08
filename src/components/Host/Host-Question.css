@@ -23,14 +23,13 @@
 .btn-update{
     display: flex;
     justify-content: center;
-    padding-top: 40px;
 }
 
 .add-quesiton-div{
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
 }
 
 .mapped-questions{
@@ -38,7 +37,7 @@
     flex: 1 1 0;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2em; 
-    margin-bottom: 200px;
+    margin-bottom: 1.5rem;
     padding-left: 25px;
     padding-right: 25px
 }
@@ -53,13 +52,16 @@
 .kwizz-container-edit{
     height: 175px;
     width: 600px;
-    background-color: rgba(255, 255, 255, 0.281);
+    background-color: var(--dark-color);
     border-radius: 4px;
     padding: 24px;
-    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
     margin-bottom: 20px;
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .input-edit::placeholder{
@@ -70,14 +72,14 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 2rem;
 }
 .question-container{
-    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
-    background-color: rgba(255, 255, 255, 0.281);
+    background-color: var(--dark-color);
     border-radius: 4px;
     padding: 0 1rem;
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
 }
 
 .question-container h1{
@@ -88,4 +90,5 @@
 
 .question-container ul li{
     margin: .5rem 0;
+    color: var(--light-color);
 }

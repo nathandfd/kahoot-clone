@@ -4,28 +4,31 @@
     justify-content: space-between;
     align-items: center;
     height: 200px;
-    width: 600px;
-    background-color: rgba(255, 255, 255, 0.281);
-    border-radius: 4px;
+    width: 100%;
+    background-color: var(--dark-color);
+    border-radius: var(--border-radius-xl);
     padding: 24px;
-    box-shadow:  0 4px 6px 1px rgba(0, 0, 0, 0.185);
-    margin-bottom: 20px;
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.kwizz-desc{
+    color: var(--light-color)
 }
 
 .btn-play, .btn-delete{
     display: block;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
-    border-radius: 2px;
+    border-radius: var(--border-radius-sm);
     border: none;
-    color: #fff;
-    background: #8B76A5;
+    color: var(--primary-color);
+    background-color: var(--dark-purple-color);
     width: auto;
-    height:2.5rem;
+    height: min-content;
     font-weight: 600;
     font-size: 20px;
-    transition: 250ms
+    transition: 250ms;
+    padding: .5rem 1rem;
 }
 
 .btn-play:hover, .btn-delete:hover{
@@ -33,7 +36,7 @@
 }
 
 .btn-delete{
-    background-color: #E97A7A;
+    background-color: var(--red-color);
 }
 
 .btn-container{
@@ -48,13 +51,13 @@
     border: none;
     text-align: center;
     padding-top: 12px;
-    border-radius: 2px;
-    background-color: #8B4F80;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--dark-purple-color);
     width: 250px;
     height: 50px;
     box-sizing: border-box;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
-    color: #fff;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
     font-size: 20px;
@@ -89,16 +92,21 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #333333;
+    background-color: var(--background-color);
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     font-weight: 700; 
 }
 
 .mapped-Kwizzes-container{
-    width: 900px;
-    display: flex;
-    flex-wrap: wrap;
+    margin: 1.5rem 0;
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
     justify-content: center;
+    align-items: center;
 }
 
 .host-logo-container{
@@ -121,8 +129,9 @@
     height: 400px;
     width: 800px;
     box-sizing: border-box;
-    background-color: #8B4F80;
-    border-radius: 6px;
+    background-color: var(--dark-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-xl);
     padding: 20px;
 }
 
@@ -138,7 +147,7 @@
     border-bottom: 2px solid currentColor;
     font-size: 1em;
     background-color: transparent;
-    color: white;
+    color: var(--primary-color);
 }
 
 .input-container{
@@ -151,7 +160,7 @@
     left: 2px;
     pointer-events: none;
     transition-duration: .2s;
-    color: var(--primary-color);
+    color: var(--light-color);
 }
 
 .input-container input:focus + label, .input-container input:not(:placeholder-shown) + label{
@@ -159,7 +168,16 @@
     top: -15px;
     left: 0;
     font-size: 0.8em;
-    color: white;
+}
+
+.input-container select + label{
+    position: absolute;
+    top: -15px;
+    left: 0;
+    font-size: 0.8em;
+    pointer-events: none;
+    transition-duration: .2s;
+    color: var(--light-color);
 }
 
 

@@ -7,6 +7,7 @@ import GameQuestionOver from './Game_Question_Over';
 import {getApiRequestUrl} from "../../Ducks/Reducer";
 import BackgroundMusic from '../../Assests/sounds/background-music.mp3'
 import Timer from "./Timer";
+import {Link} from "react-router-dom";
 
 class Game extends Component {
     constructor() {
@@ -209,6 +210,9 @@ class Game extends Component {
 
         return (
             <div className='component-container' >
+                <Link to='/host' className='btn-go-back'>
+                    &larr; Retour
+                </Link>
                 {
                     (this.state.questions.length !== this.state.currentQuestion) &&
                     <div className='pin'>

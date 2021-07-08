@@ -94,7 +94,7 @@ class Questions extends Component {
                             <Link to={`/host/editquestion/${question.id}`}>
                                 <button className='btn-play' >Modifier</button>
                             </Link>
-                            <button onClick={() => this.deleteQuestion(question.id)} className='btn-play'>Supprimer</button>
+                            <button onClick={() => this.deleteQuestion(question.id)} className='btn-delete'>Supprimer</button>
                         </div> 
                     </div>
                 )
@@ -115,7 +115,6 @@ class Questions extends Component {
                         </div>
                     <div className='kwizz-container-edit'>
                         <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
-                        <br />
                         <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p>
                         <div className='btn-update'>
                         <button onClick={() => this.displayEdit()} className='btn-play' >Modifier</button>
@@ -133,7 +132,6 @@ class Questions extends Component {
                         {/* <h1 className='kwizz-title'>{this.state.quiz.quiz_name}</h1>
                         <p className='kwizz-info kwizz-desc'>{this.state.quiz.info}</p> */}
                         <input placeholder={this.state.quiz.quiz_name} onChange={(e) => this.setState({ newName: e.target.value })} className='title-input input-edit ' />
-                        <br/>
                         <textarea placeholder={this.state.quiz.info} onChange={(e) => this.setState({ newInfo: e.target.value })} className='desc-input input-edit'></textarea>
                     <div className='btn-container-edit'>
                         <button onClick={() => this.updateQuiz()} className='btn-play'>Sauvegarder</button>
@@ -148,7 +146,6 @@ class Questions extends Component {
                             <button className='btn-new' id='add-question-btn'>Ajouter une question</button>
                         </Link>
                     </div> 
-                    <br /><br />
                     <div  className='mapped-questions' >
                         {mappedQuestions}
                     </div>

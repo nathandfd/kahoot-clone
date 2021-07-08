@@ -8,15 +8,9 @@
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
-  background-color: #333333;
+  background-color: var(--background-color);
   width: 100%;
 }
-
-
-a{
-  text-decoration: none;
-}
-
 
 @media(min-width:700px){
   .component-container{

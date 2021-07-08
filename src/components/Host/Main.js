@@ -79,7 +79,7 @@ class Main extends Component {
                 </div> 
                 <div className='newKwizz' >
                     <Link to='/host/newquiz' className='btn-link'>
-                    <button className='btn-new'>Nouveau Kwizz!</button>
+                    <button className='btn-new'>Nouveau Kwizz !</button>
                     </Link>
                 </div> 
                 <div className='mapped-Kwizzes-container' >

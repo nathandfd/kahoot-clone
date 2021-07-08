@@ -15,7 +15,7 @@ export default class New_Question extends Component {
             answer2: '',
             answer3: '',
             answer4: '',
-            correctAnswer: 0,
+            correctAnswer: 1,
             questionTime: 20,
             redirect: false
         }
@@ -76,8 +76,13 @@ export default class New_Question extends Component {
                     <label>Réponse 4 </label>
                 </div>
                 <div className='new-q input-container'>
-                    <input placeholder={" "} type='number' min='1' max='4' onChange={(e) => this.setState({ correctAnswer: e.target.value })} />
-                    <label>Bonne réponse </label>
+                    <select value={this.state.correctAnswer} onChange={(e) => this.setState({ correctAnswer: e.target.value })}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <label>Bonne réponse</label>
                 </div>
                 <div className='new-q input-container'>
                     <input placeholder={" "} value={this.state.questionTime} type='number' min='10' max='120' onChange={(e) => this.setState({ questionTime: e.target.value })} />

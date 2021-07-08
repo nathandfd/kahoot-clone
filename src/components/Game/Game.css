@@ -2,7 +2,7 @@
     display: grid;
     grid-template-rows: 60px 1fr 60px;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
-    color: #B9C0D5;
+    color: var(--primary-color);
     min-height: 100vh;
     width: 100%;
 }
@@ -23,9 +23,9 @@
 }
 
 #homelink{
-    border: 1px solid #B9C0D5;
+    border: 1px solid var(--light-purple-color);
     padding: .4rem;
-    border-radius: 2px;
+    border-radius: var(--border-radius-sm);
 }
 
 #pin{
@@ -34,8 +34,8 @@
 
 /* shapes------------------------------------ */
 .q1{
-    background-color: #e91b1b;
-    border-radius: 4px;
+    background-color: var(--dark-red-color);
+    border-radius: var(--border-radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,31 +44,31 @@
 }
 
 .q2{
-    background-color: #1b48e9;
+    background-color: var(--dark-blue-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     width: 100%;
     height: 100%;
 }
 
 .q3{
-    background-color: #e9c71b;
+    background-color: var(--dark-yellow-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     width: 100%;
     height: 100%;
 }
 
 .q4{
-    background-color: #098626;
+    background-color: var(--dark-green-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     width: 100%;
     height: 100%;
 }
@@ -120,7 +120,7 @@
     margin: 0;
     text-transform: none;
     text-shadow: none;
-    color: #fff;
+    color: var(--primary-color);
     font-weight: 700;
     letter-spacing: 1px;
     display: block;
@@ -134,7 +134,7 @@
   margin: 0;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: #fff;
+  color: var(--primary-color);
   text-align: center;
   font-size: 100px;
 }
@@ -144,19 +144,19 @@
     justify-content: space-between;
     width: 100%;
     min-height: 3.125rem;
-    background: #333333;
-    color: #B9C0D5;
+    background: var(--dark-color);
+    color: var(--primary-color);
     font-weight: 700;
     font-size: 1.125rem;
     align-items: center;
 }
 
 .status-bar-top{
-    border-bottom: .1875rem solid #B9C0D5;
+    border-bottom: .1875rem solid var(--light-purple-color);
 }
 
 .status-bar-bottom{
-    border-top: .1875rem solid #B9C0D5;
+    border-top: .1875rem solid var(--light-purple-color);
 
 }
 
@@ -165,26 +165,26 @@
     text-align: center;
     box-sizing: border-box;
     margin: 1rem 1rem;
-    color: #B9C0D5;
+    color: var(--light-purple-color);
 }
 
 .player-info{
     margin: 0;
     font-weight: 700;
     font-size: 1.125rem;
-    color: #B9C0D5;
+    color: var(--primary-color);
     max-width: 100%;
   }
 
 .status-bar-score{
     overflow: hidden;
     min-width: 5rem;
-    background-color: #8B76A5;
+    background-color: var(--light-purple-color);
     border-radius: .1875rem;
     font-size: 1rem;
     line-height: 1.875;
     text-align: center;
-    color: #fff;
+    color: var(--primary-color);
     padding-top: 6px;
     box-sizing: border-box;
 }
@@ -193,12 +193,12 @@
     overflow: hidden;
     min-width: 5rem;
     margin: 0 1em 1em;
-    background: #333;
+    background: var(--dark-color);
     border-radius: .1875rem;
     font-size: 1rem;
     line-height: 1.875;
     text-align: center;
-    color:#333;
+    color:var(--dark-color);
     padding-top: 6px;
     box-sizing: border-box;
 }
@@ -207,17 +207,18 @@
     width: 100%;
     text-align: center;
     font-size: 100px;
-    color: #fff;
+    color: var(--primary-color);
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     font-weight: 700;
-    padding-top: 100px;
+    margin-top: 100px;
+    margin-bottom: 3rem;
 }
 
 .player-name{
     width: 100%;
     text-align: center;
     font-size: 60px;
-    color: #fff;
+    color: var(--primary-color);
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     font-weight: 700;
 }
@@ -230,12 +231,12 @@
 }
 
 #player-join{
-    color: #fff;
+    color: var(--primary-color);
    font-size: 24px;
    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
 }
 #player-pin{
-    color: #fff;
+    color: var(--primary-color);
    font-size: 24px;
    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
 }
@@ -278,7 +279,7 @@
 }
 
 .question-over-wrapper h2{
-    color: #B9C0D5;
+    color: var(--primary-color);
     text-align: center;
     font-size: 2em;
     margin: 1rem 0 2rem 0;
@@ -297,9 +298,9 @@
 /*GAME OVER--------------------------------------*/
 
 .game-over {
-    margin-top: 5rem;
+    margin-top: 2rem;
     text-align: center;
-    color: #fff;
+    color: var(--primary-color);
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
 }
 
@@ -348,9 +349,9 @@
 .btn-newGame{
     display: block;
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
-    border-radius: 2px;
-    color: #fff;
-    background-color: #8B76A5;
+    border-radius: var(--border-radius-sm);
+    color: var(--primary-color);
+    background-color: var(--light-purple-color);
     border: none;
     width: 200px;
     font-weight: 700;
@@ -378,14 +379,14 @@
 /* load animation--------------------------- */
 .waiting-for-results{
     width: 100vw;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     box-sizing: border-box;
-    background-color: #7E56A4;
+    background-color: var(--dark-purple-color);
     animation-name: color;
     animation-duration: 10s;
     animation-iteration-count: infinite; 
