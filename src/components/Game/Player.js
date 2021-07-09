@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import PlayerQuestions from './Player_Questions';
 import PlayerQuestionOver from './Player_Question_Over';
+import PlayerGameOver from "./Player_Game_Over";
 import './Game.css';
 import load from '../../Assests/load-circle-outline.svg'
 import {getApiRequestUrl} from "../../Ducks/Reducer";
@@ -14,10 +15,12 @@ class Player extends Component {
         this.state = {
             pinCorrect: false,
             gameStarted: false,
+            gameOver:false,
             questionOver: false,
             answerSubmitted: false,
             answeredCorrect: false,
-            score: 0
+            score: 0,
+            place: 0
         }
         this.submitAnswer = this.submitAnswer.bind(this);
     }
@@ -26,6 +29,9 @@ class Player extends Component {
         this.socket.emit('player-joined', this.props.selectedPin)
         this.socket.emit('player-add', this.props)
         this.socket.on('room-joined', (data) => { console.log('Quiz data: ' + data) })
+        this.socket.on('game-over', data=> {
+            this.gameOver(data)
+        })
         this.socket.on('question-over', () => {
             this.setState({
                 questionOver: true
@@ -53,61 +59,79 @@ class Player extends Component {
             answerSubmitted: true
         })
     }
+
+    gameOver(data){
+       this.setState({
+           gameOver:true,
+           score: data.score,
+           place: data.place
+       })
+    }
+
     render() {
-        console.log(this.props)
         let { gameStarted, questionOver, answerSubmitted } = this.state;
         return (
-            <div className='player-container' >
-                <div className='status-bar status-bar-top'>
-                    <p className='player-info' id='pin' >PIN: {this.props.selectedPin}</p>
-                    <Link to={"/"}>
-                        <p id={"homelink"} className={"status-bar-item"}>&larr; Accueil</p>
-                    </Link>
-                </div> 
+            <div className='player-container'>
                 {
-                    !gameStarted && !questionOver
-                    ?
-                    <div className={"main-container"}>
-                            <p>Vous y êtes !
-                             <br />
-                                Pouvez-vous voir votre pseudo sur l'écran ?
-                            </p>
-                             <div className='answer-container'>
-                                    <div className=' q-blank q'></div> 
-                                    <div className=' q-blank q'></div> 
-                                    <div className=' q-blank q'></div> 
-                                    <div className=' q-blank q'></div> 
-                             </div> 
-                        </div>
-                        :
-                        gameStarted && !questionOver && !answerSubmitted
-                        ?
-                        <PlayerQuestions submitAnswer ={this.submitAnswer} />
-                        :
-                        gameStarted && !questionOver && answerSubmitted
-                        ?
-                        <div className='waiting-for-results' >
-                            <p className='answer-indicator' id= 'too-fast'>N'aurais-tu pas répondu trop vite ?</p>
-                            <img src={load} alt='' className='load-circle' />
-                        </div> 
-                        :
-                        <PlayerQuestionOver
-                         answeredCorrect={this.state.answeredCorrect}
-                        />
-                    }
-                    <div className='status-bar status-bar-bottom'>
-                        <p className='player-info status-bar-item'>{this.props.nickname}</p>
-                        <div
-                            className={
-                              gameStarted && !questionOver && answerSubmitted
-                              ?
-                              'status-bar-hidden status-bar-item'
-                              :
-                              'status-bar-score status-bar-item'
+                    !this.state.gameOver?
+                        <div className='player-container'>
+                            <div className='status-bar status-bar-top'>
+                                <p className='player-info' id='pin' >PIN: {this.props.selectedPin}</p>
+                                <Link to={"/"}>
+                                    <p id={"homelink"} className={"status-bar-item"}>&larr; Accueil</p>
+                                </Link>
+                            </div>
+                            {
+                                !gameStarted && !questionOver
+                                    ?
+                                    <div className={"main-container"}>
+                                        <p>Vous y êtes !
+                                            <br />
+                                            Pouvez-vous voir votre pseudo sur l'écran ?
+                                        </p>
+                                        <div className='answer-container'>
+                                            <div className=' q-blank q'></div>
+                                            <div className=' q-blank q'></div>
+                                            <div className=' q-blank q'></div>
+                                            <div className=' q-blank q'></div>
+                                        </div>
+                                    </div>
+                                    :
+                                    gameStarted && !questionOver && !answerSubmitted
+                                        ?
+                                        <PlayerQuestions submitAnswer ={this.submitAnswer} />
+                                        :
+                                        gameStarted && !questionOver && answerSubmitted
+                                            ?
+                                            <div className='waiting-for-results' >
+                                                <p className='answer-indicator' id= 'too-fast'>N'aurais-tu pas répondu trop vite ?</p>
+                                                <img src={load} alt='' className='load-circle' />
+                                            </div>
+                                            :
+                                            <PlayerQuestionOver
+                                                answeredCorrect={this.state.answeredCorrect}
+                                            />
                             }
-                             >{this.state.score}
-                        </div>
-                    </div>
+                            <div className='status-bar status-bar-bottom'>
+                                <p className='player-info status-bar-item'>{this.props.nickname}</p>
+                                <div
+                                    className={
+                                        gameStarted && !questionOver && answerSubmitted
+                                            ?
+                                            'status-bar-hidden status-bar-item'
+                                            :
+                                            'status-bar-score status-bar-item'
+                                    }
+                                >{this.state.score}
+                                </div>
+                            </div>
+                        </div>:
+                        <PlayerGameOver
+                            place={this.state.place}
+                            score={this.state.score}
+                        />
+
+                }
             </div>
         )
     }

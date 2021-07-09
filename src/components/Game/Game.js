@@ -50,6 +50,15 @@ class Game extends Component {
         this.state.music.pause()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if ((this.state.questions.length === this.state.currentQuestion) && this.state.isLive && !this.state.gameOver){
+            this.setState({
+                gameOver:true
+            })
+            this.gameOver()
+        }
+    }
+
     generatePin() {
         let newPin = Math.floor(Math.random() * 9000+10000)
         this.setState({ pin: newPin })
@@ -198,6 +207,13 @@ class Game extends Component {
             music.play()
         })
 
+    }
+
+    gameOver(){
+        let leaderboard = this.getLeaderBoard()
+        leaderboard.forEach((player,index)=>{
+            this.socket.emit('game-over',{id: player.id, score: player.score, place: index+1})
+        })
     }
 
     render() {

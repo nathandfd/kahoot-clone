@@ -61,6 +61,11 @@ io.on('connection', socket => {
     socket.on('question-over', (data) => {
         socket.to(`${data.pin}`).emit('question-over')
     })
+
+    socket.on('game-over', (data) => {
+        io.to(data.id).emit('game-over',{score: data.score, place: data.place})
+    })
+
     socket.on('next-question', (data) => {
         socket.to(`${data.pin}`).emit('next-question')
 

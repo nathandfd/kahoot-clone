@@ -408,6 +408,30 @@
     font-size: 1.5rem;
 }
 
+.player-game-over{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.player-game-over-title{
+    font-size: 2em;
+    font-weight: 900;
+    margin-top: 1rem;
+}
+
+.player-game-over  *{
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.player-game-over h2{
+    font-size: 2em;
+}
+
 @keyframes load-spin{
     0%   {transform: rotate(0deg)}
     75% {transform: rotate(360deg)}
