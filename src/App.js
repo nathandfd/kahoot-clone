@@ -21,8 +21,13 @@ class App extends Component {
         <Switch>
           
           <Route path='/' exact component={Landing} />
-          <Route path='/player' component={Player} />
           <Route path='/login' component={Connexion} />
+            {
+                (this.props.selectedPin !== 0 && this.props.selectedPin) ?
+                    <Route path='/player' component={Player} />
+                    :
+                    <Redirect to="/"/>
+            }
           {
             this.props.isConnected ?
                 <div>
@@ -45,7 +50,8 @@ class App extends Component {
 
 const mapStateToProps = state=>(
     {
-      isConnected:state.connected
+      isConnected:state.connected,
+        selectedPin: state.selectedPin
     }
 )
 

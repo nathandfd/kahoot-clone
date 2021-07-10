@@ -8,6 +8,7 @@ import {getApiRequestUrl} from "../../Ducks/Reducer";
 import BackgroundMusic from '../../Assests/sounds/background-music.mp3'
 import Timer from "./Timer";
 import {Link} from "react-router-dom";
+import anime from "animejs";
 
 class Game extends Component {
     constructor() {
@@ -56,6 +57,22 @@ class Game extends Component {
                 gameOver:true
             })
             this.gameOver()
+        }
+
+        if (this.state.players.length !== prevState.players.length){
+            let tl = anime.timeline({
+                targets:'.player-name-item:last-child',
+                easing:'easeOutBack',
+                duration:300
+            })
+
+            tl.add({
+                scale:1.3,
+                rotate:10
+            }).add({
+                scale:1,
+                rotate:0
+            },)
         }
     }
 
@@ -220,7 +237,7 @@ class Game extends Component {
         let { pin, questions, currentQuestion, isLive, questionOver, gameOver } = this.state;
         let mappedPlayers = this.state.players.length?this.state.players.map(player => {
             return (
-                <p key={player.id} className='player-name' >{player.name}</p>
+                <p key={player.id} className='player-name player-name-item' >{player.name}</p>
             )
         }):<p className='player-name'>Aucun joueur connecté</p>
 
