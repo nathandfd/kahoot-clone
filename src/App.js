@@ -23,13 +23,11 @@ class App extends Component {
           <Route path='/' exact component={Landing} />
           <Route path='/login' component={Connexion} />
             {
-                (this.props.selectedPin !== 0 && this.props.selectedPin) ?
-                    <Route path='/player' component={Player} />
-                    :
-                    <Redirect to="/"/>
+                (this.props.selectedPin !== 0 && this.props.selectedPin) &&
+                <Route path='/player' component={Player} />
             }
-          {
-            this.props.isConnected ?
+            {
+                this.props.isConnected &&
                 <div>
                   <Route path='/game' component={Game} />
                   <Route path='/host' exact component={Main} />
@@ -38,10 +36,8 @@ class App extends Component {
                   <Route path='/host/newquestion/:id' component={New_Question} />
                   <Route path='/host/editquestion/:id' component={Edit_Question} />
                 </div>
-                :
-                <Redirect to="/login"/>
-
-          }
+            }
+          <Redirect to="/"/>
         </Switch>
       </div>
     );
