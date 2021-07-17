@@ -8,6 +8,8 @@ const express = require('express')
     ,quizCtrl = require('./quizCtrl')
     ,{Quiz} = require('./utils/quiz')
 
+const {check} = require("express-validator")
+
 const env = {
     SERVER_PORT: "3030",
     SESSION_SECRET:"suce",
@@ -87,7 +89,7 @@ io.on('connection', socket => {
 app.use(express.static(`${__dirname}/../build`))
 app.use(bodyParser.json())
 app.use(cors({
-    origin:['http://192.168.1.29:3000','http://localhost:3000'],
+    origin:['http://193.168.147.226'],
     credentials:true
 }))
 
@@ -140,13 +142,33 @@ app.get('/api/getquiz/:id', quizCtrl.getQuiz)
 
 //Put
 
-app.put('/api/updatequestion', quizCtrl.updateQuestion)
-app.put('/api/updatequiz', quizCtrl.updateQuiz)
+app.put('/api/updatequestion', [
+    check('question').escape(),
+    check('answer1').escape(),
+    check('answer2').escape(),
+    check('answer3').escape(),
+    check('answer4').escape(),
+], quizCtrl.updateQuestion)
+
+app.put('/api/updatequiz', [
+    check('newName').escape(),
+    check('newInfo').escape(),
+], quizCtrl.updateQuiz)
 
 //Post
 
-app.post('/api/newquestion', quizCtrl.addQuestion)
-app.post('/api/newquiz', quizCtrl.newQuiz ) 
+app.post('/api/newquestion', [
+    check('question').escape(),
+    check('answer1').escape(),
+    check('answer2').escape(),
+    check('answer3').escape(),
+    check('answer4').escape(),
+], quizCtrl.addQuestion)
+
+app.post('/api/newquiz', [
+    check('name').escape(),
+    check('info').escape(),
+], quizCtrl.newQuiz )
 
 //Delete
 

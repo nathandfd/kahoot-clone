@@ -1,12 +1,21 @@
+const {decode} = require('html-entities');
+
 module.exports = {
     getQuizzes: (req, res) => {
-        console.log(req.session)
         let { id } = req.session.user;
         const db = req.app.get('db');
 
         db.query(`SELECT * FROM quizes WHERE user_id = ${id};`,(err,results)=>{
             if (!err){
-                res.status(200).send(results)
+                let newResult = results.map((result)=>{
+                    return {
+                        id: result.id,
+                        user_id: result.user_id,
+                        quiz_name: decode(result.quiz_name),
+                        info: decode(result.info),
+                    }
+                })
+                res.status(200).send(newResult)
             }
             else{
                 res.status(500).send(err)
@@ -40,7 +49,20 @@ module.exports = {
 
         db.query(`SELECT * FROM questions WHERE quiz_id = ${id};`,(err,results)=>{
             if (!err){
-                res.status(200).send(results)
+                let newResult = results.map((result)=>{
+                    return {
+                        id: result.id,
+                        quiz_id: result.quiz_id,
+                        correctAnswer: result.correctAnswer,
+                        questionTime: result.questionTime,
+                        question: decode(result.question),
+                        answer1: decode(result.answer1),
+                        answer2: decode(result.answer2),
+                        answer3: decode(result.answer3),
+                        answer4: decode(result.answer4),
+                    }
+                })
+                res.status(200).send(newResult)
             }
             else{
                 res.status(500).send(err)
@@ -92,7 +114,20 @@ module.exports = {
         const db = req.app.get('db');
         db.query(`SELECT * FROM questions WHERE id = ${id}`,(err,results)=>{
             if (!err){
-                res.status(200).send(results)
+                let newResult = results.map((result)=>{
+                    return {
+                        id: result.id,
+                        quiz_id: result.quiz_id,
+                        correctAnswer: result.correctAnswer,
+                        questionTime: result.questionTime,
+                        question: decode(result.question),
+                        answer1: decode(result.answer1),
+                        answer2: decode(result.answer2),
+                        answer3: decode(result.answer3),
+                        answer4: decode(result.answer4),
+                    }
+                })
+                res.status(200).send(newResult)
             }
             else{
                 res.status(500).send(err)
@@ -134,7 +169,15 @@ module.exports = {
         db.query(`select * from quizes
                   where id = ${id}`,(err,results)=>{
             if (!err){
-                res.status(200).send(results)
+                let newResult = results.map((result)=>{
+                    return {
+                        id: result.id,
+                        user_id: result.user_id,
+                        quiz_name: decode(result.quiz_name),
+                        info: decode(result.info),
+                    }
+                })
+                res.status(200).send(newResult)
             }
             else{
                 res.status(500).send(err)
