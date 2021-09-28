@@ -217,7 +217,7 @@
 .player-name{
     width: 100%;
     text-align: center;
-    font-size: 60px;
+    font-size: 40px;
     color: var(--primary-color);
     font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
     font-weight: 700;
@@ -232,7 +232,7 @@
 
 #player-join{
     color: var(--primary-color);
-   font-size: 24px;
+   font-size: 18px;
    font-family: montserrat,"helvetica neue",helvetica,arial,sans-serif;
 }
 #player-pin{
